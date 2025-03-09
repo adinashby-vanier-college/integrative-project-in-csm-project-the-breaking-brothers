@@ -1,4 +1,4 @@
-package com.example.chemistry;
+package com.example.chemistryapp;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
