@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class HelloApplication extends Application {
+public class main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FirebaseInitializer.initialize(); // Initialize Firebase
