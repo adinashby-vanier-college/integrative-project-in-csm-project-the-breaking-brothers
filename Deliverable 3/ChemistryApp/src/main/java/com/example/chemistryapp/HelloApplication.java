@@ -13,10 +13,16 @@ public class HelloApplication extends Application {
         FirebaseInitializer.initialize(); // Initialize Firebase
 
         primaryStage.setFullScreen(true); // Force full-screen mode
-        primaryStage.setFullScreenExitHint("Press ESC to exit full-screen mode"); // Optional hint
         Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+
+
         primaryStage.setTitle("Login");
-        primaryStage.setScene(new Scene(root, 300, 200));
+        primaryStage.setFullScreenExitHint(""); // Remove the full screen hint help alert
+        Scene scene = new Scene(root, 300, 200);
+        primaryStage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+
+
         primaryStage.show();
     }
 

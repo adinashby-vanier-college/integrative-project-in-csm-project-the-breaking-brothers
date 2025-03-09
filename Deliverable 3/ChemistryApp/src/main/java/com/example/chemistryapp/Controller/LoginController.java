@@ -7,23 +7,29 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 
 public class LoginController {
     @FXML private TextField emailField;
-    @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
-
+    @FXML private Label errorLabel;
     // Initialize Firebase
 
 
     @FXML
     protected void handleLogin() {
+
         String email = emailField.getText();
         String password = passwordField.getText();
 
@@ -37,49 +43,49 @@ public class LoginController {
             UserRecord userRecord = FirebaseAuth.getInstance().getUserByEmail(email);
             System.out.println("Login successful! User UID: " + userRecord.getUid());
 
-            // Show success message
-            showAlert("Success", "Login successful!");
+            // move to main page
+
         } catch (FirebaseAuthException e) {
-            // Handle login failure
-            System.err.println("Login failed: " + e.getMessage());
-            showAlert("Error", "Invalid email or password.");
+            errorLabel.setText("Invalid email or password. Please try again.");
         }
     }
 
     @FXML
-    protected void handleSignUp() {
-        String email = emailField.getText();
-        String password = passwordField.getText();
-
-        if (email.isEmpty() || password.isEmpty()) {
-            showAlert("Error", "Email and password cannot be empty.");
-            return;
-        }
-
+    private void handleSignUp() {
         try {
-            // Create a new user in Firebase
-            UserRecord.CreateRequest request = new UserRecord.CreateRequest()
-                    .setEmail(email)
-                    .setPassword(password);
+            // Load the sign-up FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/signup.fxml"));
+            Parent root = loader.load();
 
-            UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
-            System.out.println("Sign up successful! User UID: " + userRecord.getUid());
+            // Get the current stage and scene
+            Stage stage = (Stage) emailField.getScene().getWindow();
+            Scene scene = emailField.getScene(); // Reuse the existing scene
 
-            // Show success message
-            showAlert("Success", "Sign up successful!");
-        } catch (FirebaseAuthException e) {
-            // Handle sign-up failure
-            System.err.println("Sign up failed: " + e.getMessage());
-            showAlert("Error", "Failed to create user. Please try again.");
+            // Replace the root node of the existing scene
+            scene.setRoot(root);
+
+            // Keep the stage in full screen mode
+            stage.setFullScreen(true);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
     // Helper method to show alerts
-    private void showAlert(String title, String message) {
+    public void showAlert(String title, String message) {
+        // Create a new Alert
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
+
+        // Add BootstrapFX styles to the alert dialog
+        alert.getDialogPane().getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
+
+        // Apply BootstrapFX styles to the alert
+        alert.getDialogPane().getStyleClass().add("alert"); // Base alert style
+        alert.getDialogPane().getStyleClass().add("alert-info"); // Info style (blue)
+
+        // Show the alert
         alert.showAndWait();
     }
 }
