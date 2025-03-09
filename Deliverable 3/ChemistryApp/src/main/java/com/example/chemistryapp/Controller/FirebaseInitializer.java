@@ -13,7 +13,7 @@ public class FirebaseInitializer {
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://console.firebase.google.com/u/0/project/chemistry-d7769/database/chemistry-d7769-default-rtdb/data/~2F")
+                    .setDatabaseUrl("https://console.firebase.google.com/u/1/project/chemistryapp-122c6/database/chemistryapp-122c6-default-rtdb/data/~2F")
                     .build();
 
             FirebaseApp.initializeApp(options);
