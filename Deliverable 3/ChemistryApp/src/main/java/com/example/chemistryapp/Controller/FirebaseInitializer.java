@@ -9,11 +9,11 @@ import java.io.IOException;
 public class FirebaseInitializer {
     public static void initialize() {
         try (FileInputStream serviceAccount =
-                     new FileInputStream("src/main/resources/chemistry-d7769-firebase-adminsdk-fbsvc-f820a98144.json")) {
+                     new FileInputStream("src/main/resources/chemistryapp-d1220-firebase-adminsdk-fbsvc-27539cff24.json")) {
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://console.firebase.google.com/u/1/project/chemistryapp-122c6/database/chemistryapp-122c6-default-rtdb/data/~2F")
+                    .setDatabaseUrl("https://console.firebase.google.com/u/0/project/chemistryapp-d1220/database/chemistryapp-d1220-default-rtdb/data/~2F")
                     .build();
 
             FirebaseApp.initializeApp(options);
