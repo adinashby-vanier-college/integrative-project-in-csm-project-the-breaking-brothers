@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class MainDashboardController {
@@ -27,7 +28,7 @@ public class MainDashboardController {
     private void loadMoleculeViewerTab() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/MoleculeViewer3D.fxml"));
-            AnchorPane moleculeViewerContent = loader.load();
+            StackPane moleculeViewerContent = loader.load();
             moleculeViewerTab.setContent(moleculeViewerContent);
         } catch (Exception e) {
             e.printStackTrace();

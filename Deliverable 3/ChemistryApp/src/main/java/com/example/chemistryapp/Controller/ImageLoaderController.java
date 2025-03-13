@@ -20,12 +20,23 @@ public class ImageLoaderController {
     private ImageView moleculeImage;
 
     @FXML
-    private void handleButtonClick() {
+    private void handleLoad2D() {
         String moleculeFormula = moleculeInput.getText();
         if (moleculeFormula != null && !moleculeFormula.isEmpty()) {
             loadMoleculeImage(moleculeFormula);
         } else {
-            showAlert("Input Error", "Please enter a valid molecule formula.");
+            showAlert("Input Error", "Please enter a valid molecular formula.");
+        }
+    }
+
+    @FXML
+    private void handleLoad3D() {
+        String moleculeFormula = moleculeInput.getText();
+        if (moleculeFormula != null && !moleculeFormula.isEmpty()) {
+            ThirdDimensionViewer viewer = new ThirdDimensionViewer();
+            viewer.run(moleculeFormula, moleculeImage.getScene());
+        } else {
+            showAlert("Input Error", "Please enter a valid molecular formula.");
         }
     }
 
@@ -57,10 +68,16 @@ public class ImageLoaderController {
     }
 
     private void showAlert(String title, String message) {
+        // Create the alert dialog
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
+
+        // Ensure the alert is owned by the main stage and appears above it
+        alert.initOwner(moleculeImage.getScene().getWindow());
+
+        // Show the alert without blocking the application
         alert.showAndWait();
     }
 }

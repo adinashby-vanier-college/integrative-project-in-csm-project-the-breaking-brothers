@@ -21,7 +21,8 @@ public class OpenMainDashboard {
             Stage stage = new Stage();
             stage.setTitle("Dashboard");
             stage.setScene(new Scene(root));
-            stage.setFullScreen(true); // Optional: set full screen
+            stage.setFullScreen(true);
+            stage.setFullScreenExitHint(""); // Optional: set full screen
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

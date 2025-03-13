@@ -1,6 +1,7 @@
 package com.example.chemistryapp.Controller;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.layout.AnchorPane;
@@ -17,26 +18,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
 
-
-
-public class ThirdDimensionViewer extends Application {
+public class ThirdDimensionViewer {
 
     private static final double scaleFactor = 18; // constant to change distance between atoms
     private double mouseX, mouseY;  // stores initial mouse x y position
 
-    @Override
-    public void start(Stage primaryStage) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/index.fxml"));
+    public void run(String molecule, Scene initialScene) {
+        Stage newStage = new Stage();
+        newStage.initOwner(initialScene.getWindow());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MoleculeViewer3D.fxml"));
         try {
+
             AnchorPane root = loader.load();
-            primaryStage.setScene(new Scene(root, 600, 400));
-            primaryStage.setTitle("Molecule Viewer");
-            primaryStage.show();
+            newStage.setScene(new Scene(root, 600, 400));
+            newStage.setTitle("Molecule Viewer");
+            newStage.show();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
-        String molecule = "H2O";
         try {
             int cid = getCID(molecule);
             if (cid != -1) {
@@ -49,7 +49,7 @@ public class ThirdDimensionViewer extends Application {
 
                 if (!atoms.isEmpty()) {
                     System.out.println("not empty");
-                    show3DMolecule(primaryStage, atoms, bonds);
+                    show3DMolecule(newStage, atoms, bonds);
                 } else {
                     System.out.println("No atoms found in SDF file.");
                 }
@@ -247,9 +247,5 @@ public class ThirdDimensionViewer extends Application {
         }
         in.close();
         return response.toString().trim();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 }
