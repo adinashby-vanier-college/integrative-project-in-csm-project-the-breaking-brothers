@@ -10,5 +10,13 @@
         <Tab fx:id="periodicTableTab" text="Periodic Table" closable="false">
             <!-- Content will be set dynamically -->
         </Tab>
+
+        <Tab fx:id="stoichiometryTab" text="Stoichiometry" closable="false">
+
+        </Tab>
+
+        <Tab fx:id="pHCalculatorTab" text="pH/pOH Calculator" closable="false">
+
+        </Tab>
     </tabs>
 </TabPane>

@@ -1,5 +1,7 @@
 package com.example.chemistryapp.Controller;
 
+import com.example.chemistryapp.View.PHView;
+import com.example.chemistryapp.View.StoichiometryView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,12 +19,22 @@ public class MainDashboardController {
     private Tab periodicTableTab;
 
     @FXML
+    private Tab stoichiometryTab;
+
+    @FXML
+    private Tab pHCalculatorTab;
+
+    @FXML
     public void initialize() {
         // Loading the content for the "Molecule Viewer" tab (from FXML)
         loadMoleculeViewerTab();
 
         // Setting up the content for the "Button Tab" dynamically (no FXML)
         loadPeriodicTableTab();
+
+        loadStoichiometryTab();
+
+        loadpHCalculator();
     }
 
     private void loadMoleculeViewerTab() {
@@ -37,5 +49,17 @@ public class MainDashboardController {
 
     private void loadPeriodicTableTab() {
 
+    }
+
+    private void loadStoichiometryTab() {
+        StoichiometryView stoichiometryView = new StoichiometryView();
+
+        stoichiometryTab.setContent(stoichiometryView.initializeStoichiometry());
+    }
+
+    private void loadpHCalculator() {
+        PHView phView = new PHView();
+
+        pHCalculatorTab.setContent(phView.pHCalcInitialize());
     }
 }
