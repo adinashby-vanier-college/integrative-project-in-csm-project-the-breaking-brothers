@@ -54,8 +54,9 @@ public class SignUpController {
             UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
 
             System.out.println("User successfully created: " + userRecord.getUid());
+            GlobalData.isLoggedIn = true;
+            OpenMainDashboard.openMainDashboard();
 
-            // Clear the input fields
             emailField.clear();
             passwordField.clear();
         } catch (Exception e) {
@@ -64,6 +65,7 @@ public class SignUpController {
             errorLabel.setText("Failed to create user: " + e.getMessage());
         }
     }
+
 
     @FXML
     private void handleLogin() {

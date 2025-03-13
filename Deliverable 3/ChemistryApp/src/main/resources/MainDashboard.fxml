@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+
+<TabPane fx:id="tabPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chemistryapp.Controller.MainDashboardController">
+    <tabs>
+        <Tab fx:id="moleculeViewerTab" text="Molecule Viewer" closable="false">
+            <!-- Tab content will be loaded dynamically -->
+        </Tab>
+        <Tab fx:id="periodicTableTab" text="Periodic Table" closable="false">
+            <!-- Content will be set dynamically -->
+        </Tab>
+    </tabs>
+</TabPane>

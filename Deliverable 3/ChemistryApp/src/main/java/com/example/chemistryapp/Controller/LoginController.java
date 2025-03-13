@@ -43,12 +43,14 @@ public class LoginController {
             UserRecord userRecord = FirebaseAuth.getInstance().getUserByEmail(email);
             System.out.println("Login successful! User UID: " + userRecord.getUid());
 
-            // move to main page
-
+            GlobalData.isLoggedIn = true;
+            OpenMainDashboard.openMainDashboard();
         } catch (FirebaseAuthException e) {
             errorLabel.setText("Invalid email or password. Please try again.");
         }
     }
+
+
 
     @FXML
     private void handleSignUp() {

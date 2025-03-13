@@ -54,7 +54,11 @@
       <version>1.20.0</version>
     </dependency>
 
-
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-web</artifactId>
+      <version>17.0.6</version>  <!-- Use your JavaFX version -->
+    </dependency>
     <dependency>
       <groupId>org.kordamp.bootstrapfx</groupId>
       <artifactId>bootstrapfx-core</artifactId>

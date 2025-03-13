@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.fxml.FXML?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chemistryapp.Controller.ImageLoaderController">
+    <TextField fx:id="moleculeInput" layoutX="50" layoutY="30" promptText="Enter molecule formula"/>
+    <Button text="Load Molecule" layoutX="200" layoutY="30" onAction="#handleButtonClick"/>
+    <ImageView fx:id="moleculeImage" layoutX="50" layoutY="100"/>
+</AnchorPane>
