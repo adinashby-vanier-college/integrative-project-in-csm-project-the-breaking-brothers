@@ -1,14 +1,17 @@
 package com.example.chemistryapp.View;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 
 public class PHView {
     public VBox pHCalcInitialize() {
-        VBox root = new VBox();
+        VBox root = new VBox(15); // Vertical Spacing of 15
+        root.setAlignment(Pos.CENTER);
 
         // ComboBox to allow user to choose the type of conversion they want
         ComboBox<String> conversionChoice = new ComboBox<>();
@@ -20,7 +23,10 @@ public class PHView {
 
         TextField result = new TextField();
 
-        Button solve = new Button("Solve");
+        userInput.setMaxWidth(250);
+        result.setMaxWidth(250);
+
+        Button solve = styleButton("Solve");
 
         root.getChildren().addAll(conversionChoice, userInput, result, solve);
 
@@ -44,5 +50,14 @@ public class PHView {
         });
 
         return root;
+    }
+
+    // Method to easily change the style of the Buttons
+    private Button styleButton(String text) {
+        Button button = new Button(text);
+        button.setStyle("-fx-background-color: #386641; -fx-text-fill: white; -fx-font-weight: bold; " +
+                "-fx-font-size: 14px; -fx-min-width: 364px; -fx-max-width: 364px; -fx-min-height: 45px; " +
+                "-fx-border-radius: 10px;");
+        return button;
     }
 }

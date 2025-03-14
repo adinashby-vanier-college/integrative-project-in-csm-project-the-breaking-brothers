@@ -17,23 +17,24 @@ public class StoichiometryView {
         GridPane gridPane = new GridPane();
 
         // Creating all TextFields, Text and Buttons
-        TextField molecule1 = new TextField();
-        TextField molecule2 = new TextField();
-        TextField molecule3 = new TextField();
-        TextField molecule4 = new TextField();
-        molecule1.setPromptText("Enter Molecule");
-        molecule2.setPromptText("Enter Molecule");
+        TextField molecule1 = styleTextField("Enter Molecule");
+        TextField molecule2 = styleTextField("Enter Molecule");
+        TextField molecule3 = styleTextField("Enter Molecule");
+        TextField molecule4 = styleTextField("Enter Molecule");
+        /*molecule2.setPromptText("Enter Molecule");
         molecule3.setPromptText("Enter Molecule");
-        molecule4.setPromptText("Enter Molecule");
+        molecule4.setPromptText("Enter Molecule");*/
 
         Text plus = new Text("+");
         Text arrow = new Text("→");
         Text plus3 = new Text("+");
 
-        Button view1 = new Button("View");
-        Button view2 = new Button("View");
-        Button view3 = new Button("View");
-        Button view4 = new Button("View");
+        Button view1 = styleButton("View");
+        Button view2 = styleButton("View");
+        Button view3 = styleButton("View");
+        Button view4 = styleButton("View");
+
+        view1.setOnAction(e -> System.out.println("Button Pressed"));
 
         TextField mass1 = new TextField();
         TextField mass2 = new TextField();
@@ -71,7 +72,7 @@ public class StoichiometryView {
         concentration3.setPromptText("Enter Concentration (in g/L");
         concentration4.setPromptText("Enter Concentration (in g/L");
 
-        Button solve = new Button("Solve!");
+        Button solve = styleButton("Solve!");
         solve.setAlignment(Pos.CENTER);
 
         // Adding all Text, TextField and Buttons to the GridPane
@@ -114,10 +115,27 @@ public class StoichiometryView {
         stoichiometryVBox.setAlignment(Pos.CENTER);
         stoichiometryVBox.getChildren().addAll(gridPane, solve);
 
-
         root.setCenter(stoichiometryVBox);
         root.setTop(customMenuBarView.initializeMenuBar());
 
         return root;
+    }
+
+    // Method to easily change the style of the TextFields
+    private TextField styleTextField(String promptText) {
+        TextField textField = new TextField();
+        textField.setPromptText(promptText);
+        textField.setStyle("-fx-min-width: 364px; -fx-max-width: 364px; -fx-min-height: 45px; " +
+                "-fx-border-color: lightgray; -fx-border-radius: 7px; -fx-background-radius: 7px;");
+        return textField;
+    }
+
+    // Method to easily change the style of the Buttons
+    private Button styleButton(String text) {
+        Button button = new Button(text);
+        button.setStyle("-fx-background-color: #386641; -fx-text-fill: white; -fx-font-weight: bold; " +
+                "-fx-font-size: 14px; -fx-min-width: 364px; -fx-max-width: 364px; -fx-min-height: 45px; " +
+                "-fx-border-radius: 10px;");
+        return button;
     }
 }
