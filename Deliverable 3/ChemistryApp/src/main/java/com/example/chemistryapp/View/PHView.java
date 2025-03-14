@@ -1,5 +1,6 @@
 package com.example.chemistryapp.View;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -11,6 +12,7 @@ import javafx.scene.layout.VBox;
 public class PHView {
     public VBox pHCalcInitialize() {
         VBox root = new VBox(15); // Vertical Spacing of 15
+        root.setPadding(new Insets(10));
         root.setAlignment(Pos.CENTER);
 
         // ComboBox to allow user to choose the type of conversion they want
@@ -56,7 +58,7 @@ public class PHView {
     private Button styleButton(String text) {
         Button button = new Button(text);
         button.setStyle("-fx-background-color: #386641; -fx-text-fill: white; -fx-font-weight: bold; " +
-                "-fx-font-size: 14px; -fx-min-width: 364px; -fx-max-width: 364px; -fx-min-height: 45px; " +
+                "-fx-font-size: 14px; -fx-min-width: 364px; -fx-padding:5px; -fx-max-width: 364px; -fx-min-height: 45px; " +
                 "-fx-border-radius: 10px;");
         return button;
     }

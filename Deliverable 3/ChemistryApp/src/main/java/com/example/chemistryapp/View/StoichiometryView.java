@@ -16,6 +16,8 @@ public class StoichiometryView {
         // GridPane used for handling the stoichiometry interface
         GridPane gridPane = new GridPane();
 
+        gridPane.setHgap(8);
+        gridPane.setVgap(10);
         // Creating all TextFields, Text and Buttons
         TextField molecule1 = styleTextField("Enter Molecule");
         TextField molecule2 = styleTextField("Enter Molecule");
@@ -111,7 +113,7 @@ public class StoichiometryView {
 
         gridPane.setAlignment(Pos.CENTER);
 
-        VBox stoichiometryVBox = new VBox();
+        VBox stoichiometryVBox = new VBox(15);
         stoichiometryVBox.setAlignment(Pos.CENTER);
         stoichiometryVBox.getChildren().addAll(gridPane, solve);
 
@@ -126,7 +128,7 @@ public class StoichiometryView {
         TextField textField = new TextField();
         textField.setPromptText(promptText);
         textField.setStyle("-fx-min-width: 364px; -fx-max-width: 364px; -fx-min-height: 45px; " +
-                "-fx-border-color: lightgray; -fx-border-radius: 7px; -fx-background-radius: 7px;");
+                "-fx-border-color: lightgray; -fx-padding: 10px; -fx-border-radius: 7px; -fx-background-radius: 7px;");
         return textField;
     }
 
@@ -135,7 +137,7 @@ public class StoichiometryView {
         Button button = new Button(text);
         button.setStyle("-fx-background-color: #386641; -fx-text-fill: white; -fx-font-weight: bold; " +
                 "-fx-font-size: 14px; -fx-min-width: 364px; -fx-max-width: 364px; -fx-min-height: 45px; " +
-                "-fx-border-radius: 10px;");
+                "-fx-border-radius: 10px; -fx-alignment: center; -fx-padding: 10px;");
         return button;
     }
 }
