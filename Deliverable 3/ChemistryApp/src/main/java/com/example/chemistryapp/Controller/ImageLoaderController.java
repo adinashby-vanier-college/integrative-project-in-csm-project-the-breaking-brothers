@@ -41,19 +41,19 @@ public class ImageLoaderController {
     }
 
     private void loadMoleculeImage(String moleculeFormula) {
-        // URL for getting the png image
+
         String urlString = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/" + moleculeFormula + "/PNG";
 
-        // Start a thread
+        // cannot run in background for some reason, had to make a thread
         new Thread(() -> {
             try {
-                // Send the htp request
+                // send request
                 HttpURLConnection connection = (HttpURLConnection) new URL(urlString).openConnection();
                 connection.setRequestMethod("GET");
 
-                // Read the response
+                // read response
                 try (InputStream in = connection.getInputStream()) {
-                    // Create an Image from the InputStream
+                    // image to load the molecule image 2D
                     Image moleculeImageData = new Image(in);
                     Platform.runLater(() -> {
                         moleculeImage.setImage(moleculeImageData); // Update the ImageView
@@ -68,16 +68,15 @@ public class ImageLoaderController {
     }
 
     private void showAlert(String title, String message) {
-        // Create the alert dialog
+        // Alert dialog
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
 
-        // Ensure the alert is owned by the main stage and appears above it
+        // if this line isnt added, the alert will remove the main window
         alert.initOwner(moleculeImage.getScene().getWindow());
 
-        // Show the alert without blocking the application
         alert.showAndWait();
     }
 }

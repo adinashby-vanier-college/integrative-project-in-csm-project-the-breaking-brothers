@@ -9,20 +9,20 @@ public class OpenMainDashboard {
 
     public static void openMainDashboard() {
         try {
-            // Load the MainDashboard.fxml
+
             FXMLLoader loader = new FXMLLoader(OpenMainDashboard.class.getResource("/MainDashboard.fxml"));
             Parent root = loader.load();
 
-            // Get the controller for the MainDashboard (Optional)
-            MainDashboardController controller = loader.getController();
-            // Now, the initialize() method in MainDashboardController is automatically called
 
-            // Create a new stage and show the scene with the loaded FXML
+//            MainDashboardController controller = loader.getController();
+
+
+
             Stage stage = new Stage();
             stage.setTitle("Dashboard");
             stage.setScene(new Scene(root));
             stage.setFullScreen(true);
-            stage.setFullScreenExitHint(""); // Optional: set full screen
+            stage.setFullScreenExitHint("");
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

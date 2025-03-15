@@ -19,9 +19,6 @@ public class SignUpController {
     private TextField emailField;
 
     @FXML
-    private TextField usernameField;
-
-    @FXML
     private PasswordField passwordField;
 
     @FXML
@@ -32,25 +29,22 @@ public class SignUpController {
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        // Check if email and password are provided
         if (email.isEmpty() || password.isEmpty()) {
             errorLabel.setText("Email and password cannot be empty.");
             return;
         }
 
-        // Validate email format
         if (!isValidEmail(email)) {
             errorLabel.setText("Invalid email format.");
             return;
         }
 
         try {
-            // Create a new user in Firebase
             UserRecord.CreateRequest request = new UserRecord.CreateRequest()
                     .setEmail(email)
                     .setPassword(password);
 
-            // Create the user
+            // Create user in firebase
             UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
 
             System.out.println("User successfully created: " + userRecord.getUid());
@@ -60,7 +54,7 @@ public class SignUpController {
             emailField.clear();
             passwordField.clear();
         } catch (Exception e) {
-            // Handle sign-up failure
+            // in case sign up fails.
             System.err.println("Sign up failed: " + e.getMessage());
             errorLabel.setText("Failed to create user: " + e.getMessage());
         }
@@ -70,18 +64,17 @@ public class SignUpController {
     @FXML
     private void handleLogin() {
         try {
-            // Load the login FXML file
+            // load fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
             Parent root = loader.load();
 
-            // Get the current stage and scene
+            // get stage scene
             Stage stage = (Stage) emailField.getScene().getWindow();
-            Scene scene = emailField.getScene(); // Reuse the existing scene
+            Scene scene = emailField.getScene();
 
-            // Replace the root node of the existing scene
             scene.setRoot(root);
 
-            // Keep the stage in full screen mode
+            // keep full screen
             stage.setFullScreen(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,16 +82,8 @@ public class SignUpController {
     }
 
     private boolean isValidEmail(String email) {
-        // Simple email validation regex
+        // check if email is valid
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         return email.matches(emailRegex);
-    }
-
-    private boolean isValidUsername(String username) {
-        return username != null && username.length() >= 3;
-    }
-
-    private boolean isValidPassword(String password) {
-        return password != null && password.length() >= 6;
     }
 }

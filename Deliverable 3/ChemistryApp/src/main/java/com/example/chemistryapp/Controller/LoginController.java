@@ -39,7 +39,7 @@ public class LoginController {
         }
 
         try {
-            // Authenticate the user using Firebase
+            // firebase authentication
             UserRecord userRecord = FirebaseAuth.getInstance().getUserByEmail(email);
             System.out.println("Login successful! User UID: " + userRecord.getUid());
 
@@ -55,39 +55,35 @@ public class LoginController {
     @FXML
     private void handleSignUp() {
         try {
-            // Load the sign-up FXML file
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/signup.fxml"));
             Parent root = loader.load();
 
-            // Get the current stage and scene
             Stage stage = (Stage) emailField.getScene().getWindow();
             Scene scene = emailField.getScene(); // Reuse the existing scene
 
-            // Replace the root node of the existing scene
+
             scene.setRoot(root);
 
-            // Keep the stage in full screen mode
+
             stage.setFullScreen(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    // Helper method to show alerts
+    // show alerts
     public void showAlert(String title, String message) {
-        // Create a new Alert
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
 
-        // Add BootstrapFX styles to the alert dialog
         alert.getDialogPane().getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
 
-        // Apply BootstrapFX styles to the alert
-        alert.getDialogPane().getStyleClass().add("alert"); // Base alert style
-        alert.getDialogPane().getStyleClass().add("alert-info"); // Info style (blue)
+        alert.getDialogPane().getStyleClass().add("alert");
+        alert.getDialogPane().getStyleClass().add("alert-info");
 
-        // Show the alert
         alert.showAndWait();
     }
 }

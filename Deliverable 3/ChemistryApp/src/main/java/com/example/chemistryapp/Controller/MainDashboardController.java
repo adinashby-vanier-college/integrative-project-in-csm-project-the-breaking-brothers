@@ -26,10 +26,10 @@ public class MainDashboardController {
 
     @FXML
     public void initialize() {
-        // Loading the content for the "Molecule Viewer" tab (from FXML)
+
         loadMoleculeViewerTab();
 
-        // Setting up the content for the "Button Tab" dynamically (no FXML)
+
         loadPeriodicTableTab();
 
         loadStoichiometryTab();

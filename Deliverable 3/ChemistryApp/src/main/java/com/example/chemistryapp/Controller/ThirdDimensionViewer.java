@@ -44,7 +44,7 @@ public class ThirdDimensionViewer {
 
                 List<Atom> atoms = SDFParser.parseSDF("molecule.sdf");
 
-                // Parse bonds data as well
+                // Get the molecule data
                 List<int[]> bonds = parseBonds("molecule.sdf");
 
                 if (!atoms.isEmpty()) {
@@ -72,11 +72,12 @@ public class ThirdDimensionViewer {
         // only get the bond data
         while ((line = reader.readLine()) != null) {
             lineIndex++;
-            if (lineIndex == 4) { // Read the atom & bond count
+            if (lineIndex == 4) { // line to read amount of atoms
                 String[] parts = line.trim().split("\\s+");
                 atomCount = Integer.parseInt(parts[0]);
                 bondCount = Integer.parseInt(parts[1]);
             }
+            // starts reading bond info
             else if (lineIndex > 4 + atomCount && lineIndex <= 4 + atomCount + bondCount) {
                 String[] parts = line.trim().split("\\s+");
                 int atom1 = Integer.parseInt(parts[0]) - 1; // start from 0
@@ -129,40 +130,39 @@ public class ThirdDimensionViewer {
             double x2 = (atom2.x - centerX) * scaleFactor;
             double y2 = -(atom2.y - centerY) * scaleFactor; // Flip Y-axis
 
-            // Create a cylinder between atoms
+            // get distance using pythagors
             double distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-            Cylinder cylinder = new Cylinder(1, distance); // Set cylinder height to bond length
+            Cylinder cylinder = new Cylinder(1, distance); // bond cylinder length set
             cylinder.setMaterial(new PhongMaterial(Color.LIGHTGRAY));
 
-            // Set cylinder position to the midpoint of the two atoms
+            // cylinder position to middle of atoms
             cylinder.setTranslateX((x1 + x2) / 2);
             cylinder.setTranslateY((y1 + y2) / 2);
-            cylinder.setTranslateZ(0); // All atoms are on the same Z-axis
+            cylinder.setTranslateZ(0);
 
-            // Calculate the angle of the bond vector relative to the positive X-axis
+            // calculate angle of cylinder
             double dx = x2 - x1;
             double dy = y2 - y1;
             double angleDegrees = Math.toDegrees(Math.atan2(dy, dx));
 
-            // Rotate the cylinder to align with the bond vector
             Rotate rotate = new Rotate(angleDegrees+90, 0, 0, 0, Rotate.Z_AXIS);
             cylinder.getTransforms().add(rotate);
 
             moleculeGroup.getChildren().add(cylinder);
         }
 
-        // Create a Camera
+        // Create cam
         PerspectiveCamera camera = new PerspectiveCamera(true);
         camera.setTranslateZ(-150);
         camera.setNearClip(1);
         camera.setFarClip(1000);
 
-        // Create SubScene
+        // Create to display in
         SubScene subScene = new SubScene(moleculeGroup, 800, 600, true, SceneAntialiasing.BALANCED);
-        subScene.setFill(Color.WHITE);
+        subScene.setFill(Color.BLACK);
         subScene.setCamera(camera);
 
-        // Mouse Control for rotation and zoom
+        // mouse control
         subScene.setOnMousePressed(e -> {
             mouseX = e.getSceneX();
             mouseY = e.getSceneY();
@@ -172,7 +172,7 @@ public class ThirdDimensionViewer {
             double deltaX = e.getSceneX() - mouseX;
             double deltaY = e.getSceneY() - mouseY;
 
-            // Rotate the molecule group based on mouse movement
+            // rotate molecule
             moleculeGroup.setRotationAxis(Rotate.Y_AXIS);
             moleculeGroup.setRotate(moleculeGroup.getRotate() - deltaX * 0.5);
             moleculeGroup.setRotationAxis(Rotate.X_AXIS);
@@ -189,8 +189,7 @@ public class ThirdDimensionViewer {
             }
             camera.setTranslateZ(camera.getTranslateZ() * zoomFactor);
         });
-
-        // Add SubScene to root
+        
         Group root = new Group(subScene);
         Scene scene = new Scene(root, 800, 600, true);
         primaryStage.setScene(scene);

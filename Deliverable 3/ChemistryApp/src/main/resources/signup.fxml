@@ -25,13 +25,6 @@
                               -fx-border-color: lightgray; -fx-border-radius: 7px;-fx-background-radius: 7px;" />
         </VBox>
 
-        <!-- Username Field -->
-        <VBox spacing="5" alignment="CENTER">
-            <Label text="Username" />
-            <TextField fx:id="usernameField" promptText="Enter your username"
-                       style="-fx-min-width: 364px;-fx-max-width: 364px;-fx-min-height: 45px;-fx-max-width: 45px;
-                              -fx-border-color: lightgray; -fx-border-radius: 7px;-fx-background-radius: 7px;" />
-        </VBox>
 
         <!-- Password Field -->
         <VBox spacing="5" alignment="CENTER">
