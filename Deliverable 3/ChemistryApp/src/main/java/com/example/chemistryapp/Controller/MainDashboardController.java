@@ -1,15 +1,13 @@
 package com.example.chemistryapp.Controller;
 
 import com.example.chemistryapp.View.PHView;
-import com.example.chemistryapp.View.PeriodicTableViewer;
+import com.example.chemistryapp.View.PeriodicTableView;
 import com.example.chemistryapp.View.StoichiometryView;
+import com.example.chemistryapp.View.UserGuideView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Tab;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 public class MainDashboardController {
 
@@ -26,6 +24,9 @@ public class MainDashboardController {
     private Tab pHCalculatorTab;
 
     @FXML
+    private Tab userGuideTab;
+
+    @FXML
     public void initialize() {
 
         loadMoleculeViewerTab();
@@ -36,6 +37,10 @@ public class MainDashboardController {
         loadStoichiometryTab();
 
         loadpHCalculator();
+
+        loadUserGuide();
+
+
     }
 
     private void loadMoleculeViewerTab() {
@@ -49,10 +54,9 @@ public class MainDashboardController {
     }
 
     private void loadPeriodicTableTab() {
-        PeriodicTableViewer periodicTableViewer = new PeriodicTableViewer();
+        PeriodicTableView periodicTableView = new PeriodicTableView();
 
-        periodicTableTab.setContent(periodicTableViewer.InitializePeriodicTable());
-
+        periodicTableTab.setContent(periodicTableView.InitializePeriodicTable());
 
     }
 
@@ -66,5 +70,11 @@ public class MainDashboardController {
         PHView phView = new PHView();
 
         pHCalculatorTab.setContent(phView.pHCalcInitialize());
+    }
+
+    private void loadUserGuide() {
+        UserGuideView userGuideView = new UserGuideView();
+
+        userGuideTab.setContent(userGuideView.initializeUserGuide());
     }
 }

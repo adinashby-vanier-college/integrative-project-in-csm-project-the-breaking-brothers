@@ -18,5 +18,10 @@
         <Tab fx:id="pHCalculatorTab" text="pH/pOH Calculator" closable="false">
 
         </Tab>
+
+        <Tab fx:id="userGuideTab" text="User Guide" closable="false">
+
+        </Tab>
+
     </tabs>
 </TabPane>

@@ -1,21 +1,16 @@
 package com.example.chemistryapp.View;
 
 import com.example.chemistryapp.Controller.PeriodicTableController;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 
-public class PeriodicTableViewer{
+public class PeriodicTableView {
     public VBox InitializePeriodicTable () {
         PeriodicTableController elements = new PeriodicTableController();
 
