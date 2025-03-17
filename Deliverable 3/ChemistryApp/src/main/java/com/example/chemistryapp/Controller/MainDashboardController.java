@@ -1,6 +1,7 @@
 package com.example.chemistryapp.Controller;
 
 import com.example.chemistryapp.View.PHView;
+import com.example.chemistryapp.View.PeriodicTableViewer;
 import com.example.chemistryapp.View.StoichiometryView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,6 +49,10 @@ public class MainDashboardController {
     }
 
     private void loadPeriodicTableTab() {
+        PeriodicTableViewer periodicTableViewer = new PeriodicTableViewer();
+
+        periodicTableTab.setContent(periodicTableViewer.InitializePeriodicTable());
+
 
     }
 

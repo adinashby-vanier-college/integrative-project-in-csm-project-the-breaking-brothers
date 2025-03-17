@@ -2,6 +2,7 @@ module com.example.chemistryapp {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.auth;
+    requires javafx.graphics;
 
     requires javafx.web;
     requires java.desktop;
@@ -15,5 +16,6 @@ module com.example.chemistryapp {
     opens com.example.chemistryapp.Controller to javafx.fxml;
     exports com.example.chemistryapp.Controller to javafx.fxml;
     exports com.example.chemistryapp;
+    exports com.example.chemistryapp.View to javafx.graphics;
 
 }
