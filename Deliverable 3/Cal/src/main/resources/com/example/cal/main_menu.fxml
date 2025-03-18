@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cal.MainMenuController"
+      alignment="center" spacing="15">
+
+    <Label text="Welcome to the Calculator App" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <Button fx:id="idealGasButton" text="Ideal Gas Calculator" onAction="#openIdealGasCalculator"/>
+
+    <Button fx:id="realGasButton" text="Real Gas Calculator" onAction="#openRealGasCalculator"/>
+
+    <Button fx:id="acidBaseButton" text="Acid-Base Calculator" onAction="#openAcidBaseCalculator"/>
+
+    <Button fx:id="gibbsButton" text="Gibbs Free Energy Calculator" onAction="#openGibbsFreeEnergyCalculator"/>
+
+</VBox>
