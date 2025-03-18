@@ -6,8 +6,12 @@ import com.example.chemistryapp.View.StoichiometryView;
 import com.example.chemistryapp.View.UserGuideView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class MainDashboardController {
 
@@ -27,6 +31,20 @@ public class MainDashboardController {
     private Tab userGuideTab;
 
     @FXML
+    private Tab idealGasCalculatorTab;
+
+    @FXML
+    private Tab realGasCalculatorTab;
+
+    @FXML
+    private Tab acidBaseCalculatorTab;
+
+    @FXML
+    private Tab gibbsFreeEnergyCalculatorTab;
+
+
+
+    @FXML
     public void initialize() {
 
         loadMoleculeViewerTab();
@@ -40,14 +58,63 @@ public class MainDashboardController {
 
         loadUserGuide();
 
+        loadIdealGasCalculator();
 
+        loadRealGasCalculator();
+
+        loadAcidBaseCalculator();
+
+        loadGibbsCalculator();
+
+
+    }
+
+    public void loadIdealGasCalculator() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ideal_gas.fxml"));
+            Parent root = loader.load();
+            idealGasCalculatorTab.setContent(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Show the Real Gas Calculator
+    public void loadRealGasCalculator() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/real_gas.fxml"));
+            Parent root = loader.load();
+            realGasCalculatorTab.setContent(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadAcidBaseCalculator() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/acid_base.fxml"));
+            Parent root = loader.load();
+            acidBaseCalculatorTab.setContent(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadGibbsCalculator() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gibbs_free_energy.fxml"));
+            Parent root = loader.load();
+            gibbsFreeEnergyCalculatorTab.setContent(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadMoleculeViewerTab() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/MoleculeViewer3D.fxml"));
-            StackPane moleculeViewerContent = loader.load();
-            moleculeViewerTab.setContent(moleculeViewerContent);
+            StackPane root = loader.load();
+            moleculeViewerTab.setContent(root);
         } catch (Exception e) {
             e.printStackTrace();
         }

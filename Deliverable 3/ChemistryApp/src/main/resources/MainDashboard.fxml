@@ -22,6 +22,18 @@
         <Tab fx:id="userGuideTab" text="User Guide" closable="false">
 
         </Tab>
+        <Tab fx:id="idealGasCalculatorTab" text="Ideal Gas Calculator" closable="false">
+
+        </Tab>
+        <Tab fx:id="realGasCalculatorTab" text="Real Gas Calculator" closable="false">
+
+        </Tab>
+        <Tab fx:id="acidBaseCalculatorTab" text="Acid Base Calculator" closable="false">
+
+        </Tab>
+        <Tab fx:id="gibbsFreeEnergyCalculatorTab" text="Gibbs Free Energy Calculator" closable="false">
+
+        </Tab>
 
     </tabs>
 </TabPane>
