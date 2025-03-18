@@ -1,24 +1,11 @@
 package com.example.chemistryapp.Controller;
 
+import com.example.chemistryapp.Model.Atom;
+
 import java.io.*;
 import java.util.*;
 
-class Atom {
-    String element;
-    double x, y, z;
 
-    public Atom(String element, double x, double y, double z) {
-        this.element = element;
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-
-    @Override
-    public String toString() {
-        return element + " (" + x + ", " + y + ", " + z + ")";
-    }
-}
 
 public class SDFParser {
 

@@ -1,5 +1,6 @@
 package com.example.chemistryapp.Controller;
 
+import com.example.chemistryapp.Model.Atom;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

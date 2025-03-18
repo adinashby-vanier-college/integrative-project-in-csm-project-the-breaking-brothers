@@ -17,5 +17,7 @@ module com.example.chemistryapp {
     exports com.example.chemistryapp.Controller to javafx.fxml;
     exports com.example.chemistryapp;
     exports com.example.chemistryapp.View to javafx.graphics;
+    exports com.example.chemistryapp.Model to javafx.fxml;
+    opens com.example.chemistryapp.Model to javafx.fxml;
 
 }

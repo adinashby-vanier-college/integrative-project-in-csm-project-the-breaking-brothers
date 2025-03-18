@@ -1,8 +1,6 @@
 package com.example.chemistryapp.Controller;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
+import com.example.chemistryapp.Model.GlobalData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
@@ -16,9 +14,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
-
-import java.io.FileInputStream;
-import java.io.IOException;
 
 public class LoginController {
     @FXML private TextField emailField;

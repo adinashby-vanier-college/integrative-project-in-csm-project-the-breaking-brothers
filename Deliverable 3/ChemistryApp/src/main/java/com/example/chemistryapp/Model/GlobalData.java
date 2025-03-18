@@ -1,4 +1,4 @@
-package com.example.chemistryapp.Controller;
+package com.example.chemistryapp.Model;
 
 
 public class GlobalData {

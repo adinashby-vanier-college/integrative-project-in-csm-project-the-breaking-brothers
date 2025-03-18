@@ -8,6 +8,12 @@ import java.io.IOException;
 
 public class FirebaseInitializer {
     public static void initialize() {
+        try {
+            FileDecoder.decodeFile("src/main/resources/encoded.txt", "src/main/resources/chemistryapp-d1220-firebase-adminsdk-fbsvc-27539cff24.json");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         try (FileInputStream serviceAccount =
                      new FileInputStream("src/main/resources/chemistryapp-d1220-firebase-adminsdk-fbsvc-27539cff24.json")) {
 

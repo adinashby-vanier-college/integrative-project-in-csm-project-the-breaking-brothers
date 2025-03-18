@@ -1,8 +1,7 @@
 package com.example.chemistryapp.Controller;
 
-import com.google.firebase.FirebaseApp;
+import com.example.chemistryapp.Model.GlobalData;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
