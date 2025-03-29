@@ -26,6 +26,7 @@
         <artifactId>firebase-admin</artifactId>
         <version>9.2.0</version>
       </dependency>
+
     <dependency>
       <groupId>com.google.auth</groupId>
       <artifactId>google-auth-library-credentials</artifactId>

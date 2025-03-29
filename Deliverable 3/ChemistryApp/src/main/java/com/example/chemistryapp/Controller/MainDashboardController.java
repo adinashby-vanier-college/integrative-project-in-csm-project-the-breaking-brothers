@@ -74,7 +74,6 @@ public class MainDashboardController {
     public void setScene(Scene scene) {
         this.scene = scene;
 
-        // Now pass the scene to the settings controller
         if (settingsTab.isSelected()) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/Settings.fxml"));
@@ -93,13 +92,13 @@ public class MainDashboardController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/Settings.fxml"));
             Parent root = loader.load();
 
-            // Get the SettingsController from the FXMLLoader
+
             SettingsController settingsController = loader.getController();
 
-            // Ensure the scene is set after the tab is loaded
+
             settingsTab.setOnSelectionChanged(event -> {
                 if (settingsTab.isSelected() && settingsController != null) {
-                    // Set the scene only after the tab is selected
+
                     settingsController.setScene(settingsTab.getTabPane().getScene());
                 }
             });

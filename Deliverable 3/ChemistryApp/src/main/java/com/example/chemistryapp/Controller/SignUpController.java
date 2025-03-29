@@ -47,6 +47,7 @@ public class SignUpController {
             UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
 
             System.out.println("User successfully created: " + userRecord.getUid());
+            GlobalData.email = email;
             GlobalData.isLoggedIn = true;
             OpenMainDashboard.openMainDashboard();
 

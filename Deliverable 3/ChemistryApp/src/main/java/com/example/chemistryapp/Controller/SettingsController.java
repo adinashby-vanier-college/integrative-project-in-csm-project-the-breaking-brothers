@@ -1,5 +1,12 @@
 package com.example.chemistryapp.Controller;
 
+import com.example.chemistryapp.Model.GlobalData;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -10,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.text.Font;
+
 
 public class SettingsController {
     @FXML
@@ -25,8 +33,13 @@ public class SettingsController {
 
     @FXML
     private Label fontSizeValue;
+    private FirebaseAuth firebaseAuth;
 
     public void initialize() {
+        fontSizeSlider.setSnapToTicks(true);
+        fontSizeSlider.setMajorTickUnit(1);
+        fontSizeSlider.setMinorTickCount(0);
+        fontSizeSlider.setBlockIncrement(1);
         fontSizeSlider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -34,6 +47,19 @@ public class SettingsController {
                 updateFontSize(fontSize);
             }
         });
+        try {
+            FirebaseOptions options = FirebaseOptions.builder()
+                    .setCredentials(GoogleCredentials.getApplicationDefault())
+                    .build();
+
+            if (FirebaseApp.getApps().isEmpty()) {
+                FirebaseApp.initializeApp(options);
+            }
+
+            firebaseAuth = FirebaseAuth.getInstance();
+        } catch (Exception e) {
+            System.out.println("failed to initialize firebase");
+        }
 
 
         fontSizeValue.setText(String.valueOf((int)fontSizeSlider.getValue()));
@@ -94,11 +120,28 @@ public class SettingsController {
         fontSizeValue.setFont(Font.font(fontSize));
     }
 
-    public void handleLogout(ActionEvent actionEvent) {
+    public void handleResetPassword(ActionEvent actionEvent) {
 
     }
 
     public void handleDeleteAccount(ActionEvent actionEvent) {
+        try {
 
+            UserRecord userRecord = firebaseAuth.getUserByEmail(GlobalData.email);
+
+
+            String resetLink = firebaseAuth.generatePasswordResetLink(GlobalData.email);
+
+
+            System.out.println("Password reset link: " + resetLink);
+        } catch (FirebaseAuthException e) {
+            if (e.getErrorCode().equals("auth/user-not-found")) {
+                System.out.println("No user found with this email address");
+            } else {
+                System.out.println("Failed to generate link");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

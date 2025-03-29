@@ -62,7 +62,7 @@ public class LoginController {
                     JsonObject jsonResponse = JsonParser.parseString(response).getAsJsonObject();
 
                     System.out.println("Login successful");
-
+                    GlobalData.email = email;
                     GlobalData.isLoggedIn = true;
                     OpenMainDashboard.openMainDashboard();
                 }
