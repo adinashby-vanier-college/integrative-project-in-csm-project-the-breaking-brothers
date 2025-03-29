@@ -43,7 +43,7 @@
             <graphic>
                 <HBox spacing="5">
                     <ImageView fitWidth="16" fitHeight="16">
-                        <Image url="@Images/gear.png" />
+                        <Image url="@../Images/gear.png" />
                     </ImageView>
                     <Label text="Settings" />
                 </HBox>

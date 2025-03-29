@@ -7,11 +7,8 @@ import com.example.chemistryapp.View.UserGuideView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Tab;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 
 public class MainDashboardController {
 
@@ -42,6 +39,9 @@ public class MainDashboardController {
     @FXML
     private Tab gibbsFreeEnergyCalculatorTab;
 
+    @FXML
+    private Tab settingsTab;
+
 
 
     @FXML
@@ -66,12 +66,23 @@ public class MainDashboardController {
 
         loadGibbsCalculator();
 
+        loadSettingsTab();
 
+    }
+
+    private void loadSettingsTab() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/ideal_gas.fxml"));
+            Parent root = loader.load();
+            idealGasCalculatorTab.setContent(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadIdealGasCalculator() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ideal_gas.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/ideal_gas.fxml"));
             Parent root = loader.load();
             idealGasCalculatorTab.setContent(root);
         } catch (Exception e) {
@@ -82,7 +93,7 @@ public class MainDashboardController {
     // Show the Real Gas Calculator
     public void loadRealGasCalculator() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/real_gas.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/real_gas.fxml"));
             Parent root = loader.load();
             realGasCalculatorTab.setContent(root);
         } catch (Exception e) {
@@ -92,7 +103,7 @@ public class MainDashboardController {
 
     public void loadAcidBaseCalculator() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/acid_base.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/acid_base.fxml"));
             Parent root = loader.load();
             acidBaseCalculatorTab.setContent(root);
         } catch (Exception e) {
@@ -102,7 +113,7 @@ public class MainDashboardController {
 
     public void loadGibbsCalculator() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gibbs_free_energy.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/gibbs_free_energy.fxml"));
             Parent root = loader.load();
             gibbsFreeEnergyCalculatorTab.setContent(root);
         } catch (Exception e) {
@@ -112,7 +123,7 @@ public class MainDashboardController {
 
     private void loadMoleculeViewerTab() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/MoleculeViewer3D.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/MoleculeViewer3D.fxml"));
             StackPane root = loader.load();
             moleculeViewerTab.setContent(root);
         } catch (Exception e) {
@@ -144,4 +155,6 @@ public class MainDashboardController {
 
         userGuideTab.setContent(userGuideView.initializeUserGuide());
     }
+
+
 }

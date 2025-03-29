@@ -13,14 +13,14 @@ public class main extends Application {
         FirebaseInitializer.initialize(); // Initialize Firebase
 
         primaryStage.setFullScreen(true); // Force full-screen mode
-        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FXMLViews/login.fxml"));
 
 
         primaryStage.setTitle("Login");
         primaryStage.setFullScreenExitHint(""); // Remove the full screen hint help alert
         Scene scene = new Scene(root, 300, 200);
         primaryStage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/CSSFiles/styles.css").toExternalForm());
 
 
         primaryStage.show();

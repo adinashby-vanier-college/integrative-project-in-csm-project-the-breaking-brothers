@@ -29,7 +29,7 @@ public class UserGuideView {
         VBox root = new VBox(title, buttonsVbox);
         root.setSpacing(10);
         root.setAlignment(Pos.CENTER);
-        root.getStylesheets().add("userGuide.css");
+        root.getStylesheets().add(getClass().getResource("/CSSFiles/userGuide.css").toExternalForm());
 
         return root;
     }

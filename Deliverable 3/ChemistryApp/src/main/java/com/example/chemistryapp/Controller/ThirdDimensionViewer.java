@@ -1,8 +1,6 @@
 package com.example.chemistryapp.Controller;
 
 import com.example.chemistryapp.Model.Atom;
-import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.layout.AnchorPane;
@@ -27,7 +25,7 @@ public class ThirdDimensionViewer {
     public void run(String molecule, Scene initialScene) {
         Stage newStage = new Stage();
         newStage.initOwner(initialScene.getWindow());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MoleculeViewer3D.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/MoleculeViewer3D.fxml"));
         try {
 
             AnchorPane root = loader.load();

@@ -64,7 +64,7 @@ public class SignUpController {
     private void handleLogin() {
         try {
             // load fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/login.fxml"));
             Parent root = loader.load();
 
             // get stage scene

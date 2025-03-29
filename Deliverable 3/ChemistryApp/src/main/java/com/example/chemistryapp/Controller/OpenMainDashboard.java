@@ -10,7 +10,7 @@ public class OpenMainDashboard {
     public static void openMainDashboard() {
         try {
 
-            FXMLLoader loader = new FXMLLoader(OpenMainDashboard.class.getResource("/MainDashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(OpenMainDashboard.class.getResource("/FXMLViews/MainDashboard.fxml"));
             Parent root = loader.load();
 
 

@@ -1,9 +1,6 @@
 package com.example.chemistryapp.Controller;
 
 import com.example.chemistryapp.Model.GlobalData;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.UserRecord;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.fxml.FXML;
@@ -87,7 +84,7 @@ public class LoginController {
     private void handleSignUp() {
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/signup.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/signup.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) emailField.getScene().getWindow();
