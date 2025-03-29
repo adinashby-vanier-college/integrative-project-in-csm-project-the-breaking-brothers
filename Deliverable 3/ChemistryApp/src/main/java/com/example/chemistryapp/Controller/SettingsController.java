@@ -3,28 +3,36 @@ package com.example.chemistryapp.Controller;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
-import javafx.stage.Stage;
 
 public class SettingsController {
 
     @FXML
     private ToggleButton darkModeToggle;
 
-    private static final String LIGHT_THEME = "/styles/light-theme.css";
-    private static final String DARK_THEME = "/styles/dark-theme.css";
+    private static final String LIGHT_THEME = "/CSSFiles/light-theme.css";
+    private static final String DARK_THEME = "/CSSFiles/dark-theme.css";
+    private Scene scene;
 
-    @FXML
-    public void initialize() {
-        Scene scene = darkModeToggle.getScene();
+    public void setScene(Scene scene) {
+        this.scene = scene;
 
-        // Button is clicked
+        if (scene == null) {
+            System.err.println("Scene is null");
+            return;
+        }
+
         darkModeToggle.setOnAction(event -> {
             boolean darkMode = darkModeToggle.isSelected();
-            applyTheme(scene, darkMode);
+            applyTheme(darkMode);
         });
     }
 
-    private void applyTheme(Scene scene, boolean darkMode) {
+    private void applyTheme(boolean darkMode) {
+        if (scene == null) {
+            System.err.println("Scene is null");
+            return;
+        }
+
         scene.getStylesheets().clear();
         String theme = darkMode ? DARK_THEME : LIGHT_THEME;
         scene.getStylesheets().add(getClass().getResource(theme).toExternalForm());

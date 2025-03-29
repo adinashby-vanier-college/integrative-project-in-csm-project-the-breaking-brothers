@@ -7,6 +7,7 @@ import com.example.chemistryapp.View.UserGuideView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.StackPane;
 
@@ -42,7 +43,7 @@ public class MainDashboardController {
     @FXML
     private Tab settingsTab;
 
-
+    private Scene scene;
 
     @FXML
     public void initialize() {
@@ -70,15 +71,45 @@ public class MainDashboardController {
 
     }
 
+    public void setScene(Scene scene) {
+        this.scene = scene;
+
+        // Now pass the scene to the settings controller
+        if (settingsTab.isSelected()) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/Settings.fxml"));
+                Parent root = loader.load();
+                SettingsController settingsController = loader.getController();
+                settingsController.setScene(this.scene);
+                settingsTab.setContent(root);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void loadSettingsTab() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/Settings.fxml"));
             Parent root = loader.load();
+
+            // Get the SettingsController from the FXMLLoader
+            SettingsController settingsController = loader.getController();
+
+            // Ensure the scene is set after the tab is loaded
+            settingsTab.setOnSelectionChanged(event -> {
+                if (settingsTab.isSelected() && settingsController != null) {
+                    // Set the scene only after the tab is selected
+                    settingsController.setScene(settingsTab.getTabPane().getScene());
+                }
+            });
+
             settingsTab.setContent(root);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     public void loadIdealGasCalculator() {
         try {
