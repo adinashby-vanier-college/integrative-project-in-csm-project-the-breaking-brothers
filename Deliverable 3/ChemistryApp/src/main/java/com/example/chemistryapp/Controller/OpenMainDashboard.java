@@ -13,11 +13,6 @@ public class OpenMainDashboard {
             FXMLLoader loader = new FXMLLoader(OpenMainDashboard.class.getResource("/FXMLViews/MainDashboard.fxml"));
             Parent root = loader.load();
 
-
-//            MainDashboardController controller = loader.getController();
-
-
-
             Stage stage = new Stage();
             stage.setTitle("Dashboard");
             stage.setScene(new Scene(root));

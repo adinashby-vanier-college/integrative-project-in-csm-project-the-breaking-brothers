@@ -15,13 +15,11 @@ public class main extends Application {
         primaryStage.setFullScreen(true); // Force full-screen mode
         Parent root = FXMLLoader.load(getClass().getResource("/FXMLViews/login.fxml"));
 
-
         primaryStage.setTitle("Login");
         primaryStage.setFullScreenExitHint(""); // Remove the full screen hint help alert
         Scene scene = new Scene(root, 300, 200);
         primaryStage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("/CSSFiles/styles.css").toExternalForm());
-
 
         primaryStage.show();
     }

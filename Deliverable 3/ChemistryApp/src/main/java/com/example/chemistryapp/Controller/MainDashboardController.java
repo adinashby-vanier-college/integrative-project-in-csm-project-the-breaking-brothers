@@ -72,9 +72,9 @@ public class MainDashboardController {
 
     private void loadSettingsTab() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/ideal_gas.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/Settings.fxml"));
             Parent root = loader.load();
-            idealGasCalculatorTab.setContent(root);
+            settingsTab.setContent(root);
         } catch (Exception e) {
             e.printStackTrace();
         }

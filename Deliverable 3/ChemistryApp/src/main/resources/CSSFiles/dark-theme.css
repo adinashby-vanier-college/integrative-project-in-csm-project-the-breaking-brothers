@@ -1,0 +1,13 @@
+.root {
+    -fx-background-color: #121212;
+    -fx-text-fill: #ffffff;
+}
+
+.button {
+    -fx-background-color: #386641;
+    -fx-text-fill: #ffffff;
+}
+
+.tab-pane {
+    -fx-background-color: #222222;
+}
