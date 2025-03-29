@@ -2,6 +2,10 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tab?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
 <TabPane fx:id="tabPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chemistryapp.Controller.MainDashboardController">
     <tabs>
         <Tab fx:id="moleculeViewerTab" text="Molecule Viewer" closable="false">
@@ -33,6 +37,17 @@
         </Tab>
         <Tab fx:id="gibbsFreeEnergyCalculatorTab" text="Gibbs Free Energy Calculator" closable="false">
 
+        </Tab>
+
+        <Tab fx:id="settingsTab" closable="false">
+            <graphic>
+                <HBox spacing="5">
+                    <ImageView fitWidth="16" fitHeight="16">
+                        <Image url="@Images/gear.png" />
+                    </ImageView>
+                    <Label text="Settings" />
+                </HBox>
+            </graphic>
         </Tab>
 
     </tabs>
