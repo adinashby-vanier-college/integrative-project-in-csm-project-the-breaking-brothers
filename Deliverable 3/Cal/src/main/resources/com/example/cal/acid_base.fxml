@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cal.AcidBaseController"
+          alignment="center" hgap="20" vgap="15" style="-fx-padding: 15;">
+
+    <!-- Title -->
+    <Label text="Acid-Base Neutralization Calculator" GridPane.columnSpan="2"
+           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <!-- Acid-Base Neutralization Section (Left Column) -->
+    <Label text="Acid:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="acidField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <Label text="Base:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextField fx:id="baseField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <Label text="Acid Moles:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <TextField fx:id="acidMolesField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    <Label text="Base Moles:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <TextField fx:id="baseMolesField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+    <Button fx:id="neutralizeButton" text="Calculate Neutralization" onAction="#calculateNeutralization"
+            GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+
+    <Label fx:id="resultLabel" text="Resulting Salt: " GridPane.rowIndex="6" GridPane.columnSpan="2"/>
+    <Label fx:id="waterLabel" text="Water Produced: " GridPane.rowIndex="7" GridPane.columnSpan="2"/>
+
+    <!-- Mass to Moles Conversion Section (Right Column) -->
+    <Label text="Mass (g):" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+    <TextField fx:id="massField" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+    <Label text="Molar Mass (g/mol):" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+    <TextField fx:id="molarMassField" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+    <Button fx:id="convertButton" text="Convert Mass to Moles" onAction="#convertMassToMoles"
+            GridPane.rowIndex="3" GridPane.columnSpan="2" GridPane.columnIndex="2"/>
+
+    <Label text="Moles:" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+    <TextField fx:id="molesOutputField" editable="false" GridPane.rowIndex="4" GridPane.columnIndex="3"/>
+
+    <!-- Back Button -->
+    <Button fx:id="backButton" text="Back to Menu" onAction="#goBackToMenu"
+            GridPane.rowIndex="8" GridPane.columnSpan="4"/>
+</GridPane>
