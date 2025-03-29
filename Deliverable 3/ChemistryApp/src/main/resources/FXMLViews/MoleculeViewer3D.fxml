@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chemistryapp.Controller.ImageLoaderController"
-           style="-fx-background-color: white; -fx-padding: 20px;">
+           style="-fx-padding: 20px;">
 
     <VBox spacing="20" alignment="CENTER" style="-fx-pref-width: 400px; -fx-padding: 20px;">
 

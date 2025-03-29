@@ -23,7 +23,7 @@ public class PeriodicTableView {
         mainGrid.setPadding(new Insets(10));
         mainGrid.setHgap(2);
         mainGrid.setVgap(2);
-        mainGrid.setStyle("-fx-background-color: #f0f0f0;");
+//        mainGrid.setStyle("-fx-background-color: #f0f0f0;");
         mainGrid.setAlignment(Pos.CENTER);
 
 

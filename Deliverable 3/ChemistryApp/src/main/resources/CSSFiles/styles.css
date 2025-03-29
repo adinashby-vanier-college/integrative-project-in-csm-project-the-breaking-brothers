@@ -1,0 +1,37 @@
+.root {
+    -fx-background-color: #ffffff;
+}
+
+.label, .text {
+    -fx-text-fill: #000000;
+}
+
+.button {
+    -fx-background-color: #386641;
+    -fx-text-fill: #ffffff;
+}
+
+.tab-pane {
+    -fx-background-color: #f0f0f0;
+}
+
+.text-field, .text-area {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+    -fx-prompt-text-fill: #666666;
+}
+
+.table-view {
+    -fx-background-color: #f0f0f0;
+    -fx-text-fill: #000000;
+}
+
+.table-row-cell {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+}
+
+.menu-bar, .menu-item {
+    -fx-background-color: #f0f0f0;
+    -fx-text-fill: #000000;
+}
