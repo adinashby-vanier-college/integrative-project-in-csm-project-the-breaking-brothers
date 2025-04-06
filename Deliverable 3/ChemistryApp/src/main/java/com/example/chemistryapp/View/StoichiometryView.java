@@ -1,5 +1,6 @@
 package com.example.chemistryapp.View;
 
+import com.example.chemistryapp.Controller.StoichiometryController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -8,8 +9,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
+
 public class StoichiometryView {
     public BorderPane initializeStoichiometry() {
+        StoichiometryController stoichio = new StoichiometryController();
         CustomMenuBarView customMenuBarView = new CustomMenuBarView();
         BorderPane root = new BorderPane();
 
@@ -76,6 +80,44 @@ public class StoichiometryView {
 
         Button solve = styleButton("Solve!");
         solve.setAlignment(Pos.CENTER);
+
+        solve.setOnAction(e -> {
+            ArrayList<String> reactants = new ArrayList<>();
+            ArrayList<String> products = new ArrayList<>();
+
+            // Collect inputs properly
+            if (molecule1 != null) {
+                reactants.add(molecule1.getText());
+            }
+            if (molecule2 != null) {
+                reactants.add(molecule2.getText());
+            }
+            if (molecule3 != null) {
+                products.add(molecule3.getText());
+            }
+            if (molecule4 != null) {
+                products.add(molecule4.getText());
+            }
+
+
+            ArrayList<String> balancedEquation = stoichio.getBalancedEquation(
+                    stoichio.rref(
+                            stoichio.createMatrix(reactants, products,
+                                    stoichio.getUniqueElements(molecule1.getText(), molecule2.getText()))
+                    ),
+                    reactants,
+                    products
+            );
+
+            // Adding the updated Molecules
+            if (balancedEquation.size() >= 1) molecule1.setText(balancedEquation.get(0));
+            if (balancedEquation.size() >= 2) molecule2.setText(balancedEquation.get(1));
+            if (balancedEquation.size() >= 3) molecule3.setText(balancedEquation.get(2));
+            if (balancedEquation.size() >= 4) molecule4.setText(balancedEquation.get(3));
+
+            System.out.println("Solved!");
+            System.out.println(balancedEquation);
+        });
 
         // Adding all Text, TextField and Buttons to the GridPane
         gridPane.add(molecule1, 0,0);
