@@ -1,7 +1,9 @@
 package com.example.chemistryapp.Controller;
 
-public class PeriodicTableController {
+import java.util.HashMap;
+import java.util.Map;
 
+public class PeriodicTableController {
 
     public String[] colorsInfo() {
         String[] colors = {
@@ -40,7 +42,7 @@ public class PeriodicTableController {
         return act;
     }
 
-    public Object[][] elementInfo (){
+    public Object[][] elementInfo () {
         Object[][] elements = {
                 // Period 1
                 {0, 0, "H", "Hydrogen", 1, 5}, {0, 17, "He", "Helium", 2, 7},
@@ -103,5 +105,23 @@ public class PeriodicTableController {
         };
 
         return elements;
+    }
+
+    public Object[][] getElementDetails (int atomicNumber) {
+        com.example.chemistryapp.Controller.ElementData elementData = ElementDataScraper.scrapeElementData(atomicNumber);
+
+        return new Object[][] {
+                {"Name", elementData.getName()},
+                {"Symbol", elementData.getSymbol()},
+                {"Atomic Number", elementData.getAtomicNumber()},
+                {"Atomic Weight", elementData.getAtomicWeight()},
+                {"Group", elementData.getGroup()},
+                {"Period", elementData.getPeriod()},
+                {"Electron Configuration", elementData.getElectronConfiguration()},
+                {"Density", elementData.getDensity()},
+                {"Boiling Point", elementData.getBoilingPoint()},
+                {"Melting Point", elementData.getMeltingPoint()},
+                {"Description", elementData.getDescription()}
+        };
     }
 }
