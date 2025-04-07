@@ -11,6 +11,7 @@ module com.example.chemistryapp {
     requires firebase.admin;
     requires com.google.auth.oauth2;
     requires grpc.grpclb;
+    requires org.jsoup;
 
     opens com.example.chemistryapp to javafx.fxml;
     opens com.example.chemistryapp.Controller to javafx.fxml;

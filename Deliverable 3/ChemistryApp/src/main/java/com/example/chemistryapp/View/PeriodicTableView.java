@@ -3,11 +3,18 @@ package com.example.chemistryapp.View;
 import com.example.chemistryapp.Controller.PeriodicTableController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 
 
 public class PeriodicTableView {
@@ -72,7 +79,7 @@ public class PeriodicTableView {
         return root;
     }
 
-    private Button createElementButton(String symbol, String name, int number, String color) {
+    public Button createElementButton(String symbol, String name, int number, String color) {
         Button btn = new Button();
         btn.setPrefSize(70, 70);
         btn.setStyle("-fx-background-color: " + color + ";"
@@ -92,7 +99,111 @@ public class PeriodicTableView {
         btn.setOnMouseEntered(e -> btn.setStyle("-fx-background-color: derive(" + color + ", 20%);"));
         btn.setOnMouseExited(e -> btn.setStyle("-fx-background-color: " + color + ";"));
 
+        btn.setOnAction(e -> showElementDetails(number, name, symbol));
+
         return btn;
+    }
+
+    public void showElementDetails(int atomicNumber, String elementName, String elementSymbol) {
+        PeriodicTableController elements = new PeriodicTableController();
+        Object[][] elementArray = elements.getElementDetails(atomicNumber);
+
+        String atomicNumberStr = getValueFromArray(elementArray, "Atomic Number");
+        String atomicWeight = getValueFromArray(elementArray, "Atomic Weight");
+        String density = getValueFromArray(elementArray, "Density");
+        String meltingPoint = getValueFromArray(elementArray, "Melting Point");
+        String boilingPoint = getValueFromArray(elementArray, "Boiling Point");
+        String group = getValueFromArray(elementArray, "Group");
+        String period = getValueFromArray(elementArray, "Period");
+        String electronConfig = getValueFromArray(elementArray, "Electron Configuration");
+        String description = getValueFromArray(elementArray, "Description");
+
+        Stage detailStage = new Stage();
+        detailStage.setTitle(elementName);
+
+        BorderPane borderPane = new BorderPane();
+        borderPane.setPadding(new Insets(20));
+
+        VBox headerBox = new VBox(10);
+        headerBox.setAlignment(Pos.CENTER);
+
+        Label nameLabel = new Label(elementName + " (" + elementSymbol + ")");
+        nameLabel.setFont(new Font("Arial", 24));
+        nameLabel.setStyle("-fx-font-weight: bold;");
+
+        headerBox.getChildren().add(nameLabel);
+        borderPane.setTop(headerBox);
+
+        GridPane infoGrid = new GridPane();
+        infoGrid.setHgap(15);
+        infoGrid.setVgap(10);
+        infoGrid.setPadding(new Insets(20));
+
+        addInfoRow(infoGrid, 0, "Atomic Number:", atomicNumberStr);
+        addInfoRow(infoGrid, 1, "Atomic Weight:", atomicWeight);
+        addInfoRow(infoGrid, 2, "Density:", density);
+        addInfoRow(infoGrid, 3, "Melting Point:", meltingPoint);
+        addInfoRow(infoGrid, 4, "Boiling Point:", boilingPoint);
+        addInfoRow(infoGrid, 5, "Group:", group);
+        addInfoRow(infoGrid, 6, "Period:", period);
+        addInfoRow(infoGrid, 7, "Electron Configuration:", electronConfig);
+        System.out.println(density);
+
+        VBox technicalBox = new VBox(10);
+        technicalBox.setPadding(new Insets(20, 0, 0, 0));
+
+        Label technicalLabel = new Label("Technical Data");
+        technicalLabel.setFont(new Font("Arial", 16));
+        technicalLabel.setStyle("-fx-font-weight: bold;");
+
+        TextFlow technicalFlow = new TextFlow();
+        Text technicalText = new Text(description);
+        technicalText.setWrappingWidth(600);
+        technicalFlow.getChildren().add(technicalText);
+
+        ScrollPane scrollPane = new ScrollPane(technicalFlow);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setPrefHeight(200);
+        scrollPane.setStyle("-fx-background-color: #f8f8f8; -fx-border-color: #ddd;");
+
+        technicalBox.getChildren().addAll(technicalLabel, scrollPane);
+
+        VBox contentBox = new VBox(20);
+        contentBox.getChildren().addAll(infoGrid, technicalBox);
+
+        borderPane.setCenter(contentBox);
+
+        Button closeButton = new Button("Close");
+        closeButton.setOnAction(e -> detailStage.close());
+        closeButton.setPrefWidth(100);
+
+        VBox bottomBox = new VBox(closeButton);
+        bottomBox.setPadding(new Insets(20, 0, 0, 0));
+        bottomBox.setAlignment(Pos.CENTER);
+
+        borderPane.setBottom(bottomBox);
+
+        Scene scene = new Scene(borderPane, 700, 600);
+        detailStage.setScene(scene);
+        detailStage.show();
+    }
+
+    private String getValueFromArray(Object[][] array, String key) {
+        for (Object[] row : array) {
+            if (row[0].equals(key)) {
+                return row[1] != null ? row[1].toString() : "N/A";
+            }
+        }
+        return "N/A";
+    }
+
+    public void addInfoRow(GridPane grid, int row, String label, String value) {
+        Label infoLabel = new Label(label);
+        infoLabel.setStyle("-fx-font-weight: bold;");
+        grid.add(infoLabel, 0, row);
+
+        Label infoValue = new Label(value != null ? value : "N/A");
+        grid.add(infoValue, 1, row);
     }
 
 }
