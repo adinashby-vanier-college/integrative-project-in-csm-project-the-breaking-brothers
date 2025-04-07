@@ -1,4 +1,5 @@
 module com.example.chemistryapp {
+    requires org.jsoup;
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.auth;
