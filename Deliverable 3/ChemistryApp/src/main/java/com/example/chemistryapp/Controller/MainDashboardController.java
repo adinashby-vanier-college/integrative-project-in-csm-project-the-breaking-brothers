@@ -1,9 +1,6 @@
 package com.example.chemistryapp.Controller;
 
-import com.example.chemistryapp.View.PHView;
-import com.example.chemistryapp.View.PeriodicTableView;
-import com.example.chemistryapp.View.StoichiometryView;
-import com.example.chemistryapp.View.UserGuideView;
+import com.example.chemistryapp.View.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -43,6 +40,9 @@ public class MainDashboardController {
     @FXML
     private Tab settingsTab;
 
+    @FXML
+    private Tab graphTab;
+
     private Scene scene;
 
     @FXML
@@ -69,6 +69,8 @@ public class MainDashboardController {
 
         loadSettingsTab();
 
+        loadGraphTab();
+
     }
 
     public void setScene(Scene scene) {
@@ -87,14 +89,19 @@ public class MainDashboardController {
         }
     }
 
+    private void loadGraphTab() {
+        ReactionGraphViewer reactionGraphViewer = new ReactionGraphViewer();
+
+        graphTab.setContent(reactionGraphViewer.initializeReactionGraph());
+
+    }
+
     private void loadSettingsTab() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/Settings.fxml"));
             Parent root = loader.load();
 
-
             SettingsController settingsController = loader.getController();
-
 
             settingsTab.setOnSelectionChanged(event -> {
                 if (settingsTab.isSelected() && settingsController != null) {

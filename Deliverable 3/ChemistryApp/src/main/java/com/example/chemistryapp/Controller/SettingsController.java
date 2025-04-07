@@ -59,6 +59,7 @@ public class SettingsController {
             firebaseAuth = FirebaseAuth.getInstance();
         } catch (Exception e) {
             System.out.println("failed to initialize firebase");
+            System.out.println(e.getMessage());
         }
 
 

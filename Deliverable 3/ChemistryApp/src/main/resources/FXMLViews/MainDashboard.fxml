@@ -39,6 +39,10 @@
 
         </Tab>
 
+        <Tab fx:id="graphTab" text="Reaction Graph Viewer" closable="false">
+
+        </Tab>
+
         <Tab fx:id="settingsTab" closable="false">
             <graphic>
                 <HBox spacing="5">
