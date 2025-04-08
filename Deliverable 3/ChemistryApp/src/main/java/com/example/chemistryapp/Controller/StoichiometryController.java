@@ -1,6 +1,8 @@
 package com.example.chemistryapp.Controller;
 
 
+import javafx.scene.control.TextField;
+
 import java.util.ArrayList;
 
 public class StoichiometryController {
@@ -274,5 +276,50 @@ public class StoichiometryController {
         }
 
         return balancedMolecules;
+    }
+
+    public ArrayList<String> missingFieldCalculator(TextField molecule1, TextField molecule2, TextField molecule3, TextField molecule4) {
+        TextField[] textFields = {molecule1, molecule2, molecule3, molecule4};
+        int emptyFieldPosition = -1;
+        Double[] values = new Double[4];
+
+        for (int i = 0; i < textFields.length; i++) {
+            String text = textFields[i].getText().trim();
+            if (text.isEmpty()) {
+                emptyFieldPosition = i;
+            } else {
+                values[i] = Double.parseDouble(text);
+            }
+        }
+
+
+        double missingValue = 0;
+        switch (emptyFieldPosition) {
+            case 0: // r1 missing
+                missingValue =  values[2] + values[3] - values[1];
+                break;
+            case 1: // r2 missing
+                missingValue = values[2] + values[3] - values[0];
+                break;
+            case 2: // p1 missing
+                missingValue = values[0] + values[1] - values[3];
+                break;
+            case 3: // p2 missing
+                missingValue = values[0] + values[1] - values[2];
+                break;
+            default:
+                System.out.println("Unexpected error.");
+                return null;
+        }
+        if (textFields[emptyFieldPosition] != null) {
+            textFields[emptyFieldPosition].setText(String.valueOf(missingValue));
+        }
+        values[emptyFieldPosition] = missingValue;
+
+        ArrayList<String> result = new ArrayList<>();
+        for (Double v : values) {
+            result.add(String.valueOf(v));
+        }
+        return result;
     }
 }

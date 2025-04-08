@@ -85,6 +85,7 @@ public class StoichiometryView {
             ArrayList<String> reactants = new ArrayList<>();
             ArrayList<String> products = new ArrayList<>();
 
+
             // Collect inputs properly
             if (molecule1 != null) {
                 reactants.add(molecule1.getText());
@@ -109,7 +110,7 @@ public class StoichiometryView {
                     products
             );
 
-            // Adding the updated Molecules
+            // Replacing the updated Molecules
             if (balancedEquation.size() >= 1) molecule1.setText(balancedEquation.get(0));
             if (balancedEquation.size() >= 2) molecule2.setText(balancedEquation.get(1));
             if (balancedEquation.size() >= 3) molecule3.setText(balancedEquation.get(2));
@@ -117,6 +118,27 @@ public class StoichiometryView {
 
             System.out.println("Solved!");
             System.out.println(balancedEquation);
+
+
+            ArrayList<String> solvedMass = stoichio.missingFieldCalculator(mass1, mass2, mass3, mass4);
+            System.out.println(solvedMass);
+            mass1.setText(solvedMass.get(0));
+            mass2.setText(solvedMass.get(1));
+            mass3.setText(solvedMass.get(2));
+            mass4.setText(solvedMass.get(3));
+
+            ArrayList<String> solvedEnergy = stoichio.missingFieldCalculator(energy1, energy2, energy3, energy4);
+            energy1.setText(solvedEnergy.get(0));
+            energy2.setText(solvedEnergy.get(1));
+            energy3.setText(solvedEnergy.get(2));
+            energy4.setText(solvedEnergy.get(3));
+
+            ArrayList<String> solvedConcentration = stoichio.missingFieldCalculator(concentration1, concentration2, concentration3, concentration4);
+            concentration1.setText(solvedConcentration.get(0));
+            concentration2.setText(solvedConcentration.get(1));
+            concentration3.setText(solvedConcentration.get(2));
+            concentration4.setText(solvedConcentration.get(3));
+
         });
 
         // Adding all Text, TextField and Buttons to the GridPane
