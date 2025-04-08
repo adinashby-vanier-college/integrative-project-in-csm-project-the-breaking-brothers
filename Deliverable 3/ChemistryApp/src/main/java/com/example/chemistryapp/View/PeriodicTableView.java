@@ -7,13 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -185,6 +183,10 @@ public class PeriodicTableView {
 
         Scene scene = new Scene(borderPane, 700, 600);
         detailStage.setScene(scene);
+
+        StackPane root = new StackPane();
+        root.getChildren().add(borderPane); // your usual content
+
         detailStage.show();
     }
 
