@@ -1,5 +1,6 @@
 package com.example.chemistryapp.View;
 
+import com.example.chemistryapp.Controller.PHCalculator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,6 +12,7 @@ import javafx.scene.layout.VBox;
 
 public class PHView {
     public VBox pHCalcInitialize() {
+        PHCalculator phcalc = new PHCalculator();
         VBox root = new VBox(15); // Vertical Spacing of 15
         root.setPadding(new Insets(10));
         root.setAlignment(Pos.CENTER);
@@ -41,13 +43,19 @@ public class PHView {
             if ("pH -> pOH".equals(selectedConversion)){
                 userInput.setPromptText("Enter pH");
 
-                // solve.setOnAction(e -> formulaForpHConversion);
+                solve.setOnAction(f -> {
+                    String convertedResult = ""+ phcalc.convertTopOH(Double.parseDouble(userInput.getText()));
+                    result.setText(convertedResult);
+                });
             }
 
             else if ("pOH -> pH".equals(selectedConversion)) {
                 userInput.setPromptText("Enter pOH");
 
-                // solve.setOnAction(e -> formulaForpHConversion);
+                solve.setOnAction(f -> {
+                    String convertedResult = ""+ phcalc.convertTopH(Double.parseDouble(userInput.getText()));
+                    result.setText(convertedResult);
+                });
             }
         });
 
