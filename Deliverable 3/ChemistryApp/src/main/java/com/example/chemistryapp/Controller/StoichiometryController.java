@@ -48,10 +48,11 @@ public class StoichiometryController {
         return result;
     }
 
-    public ArrayList<String> getUniqueElements(String molecule1, String molecule2) {
+    public ArrayList<String> getUniqueElements(String molecule1, String molecule2) { // TODO ArrayList reactants
         ArrayList<String> elements = new ArrayList<>();
 
         // Allows the program to find all the elements in the equation.
+        // TODO Create a loop that does the extract element for all in the reactants arrayList
         extractElements(molecule1, elements);
         extractElements(molecule2, elements);
 
@@ -275,6 +276,7 @@ public class StoichiometryController {
             balancedMolecules.add(balanced);
         }
 
+        // TODO: FIND A WAY TO RETURN REACTANTS AND PRODUCTS SEPARETELY
         return balancedMolecules;
     }
 

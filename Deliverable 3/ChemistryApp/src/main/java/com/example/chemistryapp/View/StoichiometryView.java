@@ -27,18 +27,24 @@ public class StoichiometryView {
         TextField molecule2 = styleTextField("Enter Molecule");
         TextField molecule3 = styleTextField("Enter Molecule");
         TextField molecule4 = styleTextField("Enter Molecule");
+        TextField molecule5 = styleTextField("Enter Molecule");
+        TextField molecule6 = styleTextField("Enter Molecule");
         /*molecule2.setPromptText("Enter Molecule");
         molecule3.setPromptText("Enter Molecule");
         molecule4.setPromptText("Enter Molecule");*/
 
         Text plus = new Text("+");
+        Text plus2 = new Text("+");
         Text arrow = new Text("→");
         Text plus3 = new Text("+");
+        Text plus4 = new Text("+");
 
         Button view1 = styleButton("View");
         Button view2 = styleButton("View");
         Button view3 = styleButton("View");
         Button view4 = styleButton("View");
+        Button view5 = styleButton("View");
+        Button view6 = styleButton("View");
 
         view1.setOnAction(e -> System.out.println("Button Pressed"));
 
@@ -46,37 +52,53 @@ public class StoichiometryView {
         TextField mass2 = new TextField();
         TextField mass3 = new TextField();
         TextField mass4 = new TextField();
+        TextField mass5 = new TextField();
+        TextField mass6 = new TextField();
         mass1.setPromptText("Enter Mass (in g)");
         mass2.setPromptText("Enter Mass (in g)");
         mass3.setPromptText("Enter Mass (in g)");
         mass4.setPromptText("Enter Mass (in g)");
+        mass5.setPromptText("Enter Mass (in g)");
+        mass6.setPromptText("Enter Mass (in g)");
 
         TextField moles1 = new TextField();
         TextField moles2 = new TextField();
         TextField moles3 = new TextField();
         TextField moles4 = new TextField();
+        TextField moles5 = new TextField();
+        TextField moles6 = new TextField();
         moles1.setPromptText("Enter amount of Moles");
         moles2.setPromptText("Enter amount of Moles");
         moles3.setPromptText("Enter amount of Moles");
         moles4.setPromptText("Enter amount of Moles");
+        moles5.setPromptText("Enter amount of Moles");
+        moles6.setPromptText("Enter amount of Moles");
 
         TextField energy1 = new TextField();
         TextField energy2 = new TextField();
         TextField energy3 = new TextField();
         TextField energy4 = new TextField();
+        TextField energy5 = new TextField();
+        TextField energy6 = new TextField();
         energy1.setPromptText("Enter Energy (in kJ/mol)");
         energy2.setPromptText("Enter Energy (in kJ/mol)");
         energy3.setPromptText("Enter Energy (in kJ/mol)");
         energy4.setPromptText("Enter Energy (in kJ/mol)");
+        energy5.setPromptText("Enter Energy (in kJ/mol)");
+        energy6.setPromptText("Enter Energy (in kJ/mol)");
 
         TextField concentration1 = new TextField();
         TextField concentration2 = new TextField();
         TextField concentration3 = new TextField();
         TextField concentration4 = new TextField();
+        TextField concentration5 = new TextField();
+        TextField concentration6 = new TextField();
         concentration1.setPromptText("Enter Concentration (in g/L)");
         concentration2.setPromptText("Enter Concentration (in g/L)");
         concentration3.setPromptText("Enter Concentration (in g/L");
         concentration4.setPromptText("Enter Concentration (in g/L");
+        concentration5.setPromptText("Enter Concentration (in g/L");
+        concentration6.setPromptText("Enter Concentration (in g/L");
 
         Button solve = styleButton("Solve!");
         solve.setAlignment(Pos.CENTER);
@@ -86,8 +108,9 @@ public class StoichiometryView {
             ArrayList<String> products = new ArrayList<>();
 
 
+            // TODO Create a better way to add shit to the reactants and products array
             // Collect inputs properly
-            if (molecule1 != null) {
+            if (molecule1 != null && molecule1.getText() != null) {
                 reactants.add(molecule1.getText());
             }
             if (molecule2 != null) {
@@ -111,6 +134,7 @@ public class StoichiometryView {
             );
 
             // Replacing the updated Molecules
+            // TODO MAKE A BETTER WAY TO SET TEXT
             if (balancedEquation.size() >= 1) molecule1.setText(balancedEquation.get(0));
             if (balancedEquation.size() >= 2) molecule2.setText(balancedEquation.get(1));
             if (balancedEquation.size() >= 3) molecule3.setText(balancedEquation.get(2));
@@ -145,35 +169,49 @@ public class StoichiometryView {
         gridPane.add(molecule1, 0,0);
         gridPane.add(plus, 1,0);
         gridPane.add(molecule2, 2, 0);
-        gridPane.add(arrow, 3,0);
+        gridPane.add(plus2, 3,0);
         gridPane.add(molecule3, 4,0);
-        gridPane.add(plus3, 5, 0);
+        gridPane.add(arrow, 5, 0);
         gridPane.add(molecule4, 6,0);
+        gridPane.add(plus3, 7,0);
+        gridPane.add(molecule5, 8,0);
+        gridPane.add(plus4, 9,0);
+        gridPane.add(molecule6, 10,0);
 
         gridPane.add(view1, 0,1);
         gridPane.add(view2, 2,1);
         gridPane.add(view3, 4,1);
         gridPane.add(view4, 6,1);
+        gridPane.add(view5, 8,1);
+        gridPane.add(view6, 10,1);
 
         gridPane.add(mass1, 0,2);
         gridPane.add(mass2, 2,2);
         gridPane.add(mass3, 4,2);
         gridPane.add(mass4, 6,2);
+        gridPane.add(mass5, 8,2);
+        gridPane.add(mass6, 10,2);
 
         gridPane.add(moles1, 0, 3);
         gridPane.add(moles2, 2, 3);
         gridPane.add(moles3, 4, 3);
         gridPane.add(moles4, 6, 3);
+        gridPane.add(moles5, 8, 3);
+        gridPane.add(moles6, 10, 3);
 
         gridPane.add(energy1, 0, 4);
         gridPane.add(energy2, 2, 4);
         gridPane.add(energy3, 4, 4);
         gridPane.add(energy4, 6, 4);
+        gridPane.add(energy5, 8, 4);
+        gridPane.add(energy6, 10, 4);
 
         gridPane.add(concentration1, 0, 5);
         gridPane.add(concentration2, 2, 5);
         gridPane.add(concentration3, 4, 5);
         gridPane.add(concentration4, 6, 5);
+        gridPane.add(concentration5, 8, 5);
+        gridPane.add(concentration6, 10, 5);
 
         gridPane.setAlignment(Pos.CENTER);
 
