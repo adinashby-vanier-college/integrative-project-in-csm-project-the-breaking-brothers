@@ -1,5 +1,8 @@
 package com.example.chemistryapp.Model;
 
+/**
+ * Atom class, holds x y z coords
+ */
 public class Atom {
     public String element;
     public double x, y, z;

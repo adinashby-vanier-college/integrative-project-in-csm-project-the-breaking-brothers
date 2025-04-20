@@ -6,7 +6,9 @@ import java.io.*;
 import java.util.*;
 
 
-
+/**
+ * Class used to store the data of the molecules scraped from pubChem
+ */
 public class SDFParser {
 
     public static List<Atom> parseSDF(String filename) throws IOException {

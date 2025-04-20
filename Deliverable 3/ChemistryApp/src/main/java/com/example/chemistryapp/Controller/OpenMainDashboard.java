@@ -5,6 +5,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Class that is used after log in is successfull
+ */
 public class OpenMainDashboard {
 
     public static void openMainDashboard() {

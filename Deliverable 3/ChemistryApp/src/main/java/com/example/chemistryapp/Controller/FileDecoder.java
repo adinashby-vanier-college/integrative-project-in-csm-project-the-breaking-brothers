@@ -6,7 +6,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Base64;
 
+
+/**
+ * File decoder class to decode the key for the database
+ */
 public class FileDecoder {
+    /**
+     * @param encodedFilePath path of file
+     * @param outputFilePath output path to export
+     * @throws IOException in case of error
+     */
     public static void decodeFile(String encodedFilePath, String outputFilePath) throws IOException {
         // Read the encoded file into a string
         BufferedReader reader = new BufferedReader(new FileReader(encodedFilePath));

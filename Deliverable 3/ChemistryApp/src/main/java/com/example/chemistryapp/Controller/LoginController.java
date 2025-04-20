@@ -22,6 +22,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+/**
+ * Login controller, controls the Login system
+ */
 public class LoginController {
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
@@ -66,7 +69,7 @@ public class LoginController {
                     System.out.println("Login successful");
                     GlobalData.email = email;
                     GlobalData.isLoggedIn = true;
-                    
+
                     OpenMainDashboard.openMainDashboard();
                 }
             } else {

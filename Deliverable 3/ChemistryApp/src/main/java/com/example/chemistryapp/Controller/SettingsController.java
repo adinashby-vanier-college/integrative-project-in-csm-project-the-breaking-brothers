@@ -18,7 +18,9 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.text.Font;
 
-
+/**
+ * Class to control the settings
+ */
 public class SettingsController {
     @FXML
     private ToggleButton darkModeToggle;

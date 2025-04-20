@@ -3,6 +3,9 @@ package com.example.chemistryapp.View;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 
+/**
+ * Menu bar class
+ */
 public class CustomMenuBarView {
     public MenuBar initializeMenuBar() {
         MenuBar menuBar = new MenuBar();

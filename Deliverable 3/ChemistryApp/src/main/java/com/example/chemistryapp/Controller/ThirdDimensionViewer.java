@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
 
+/**
+ * Class that gets the file with the sdf data, plot the atoms and make the bonds between them
+ */
 public class ThirdDimensionViewer {
 
     private static final double scaleFactor = 18; // constant to change distance between atoms

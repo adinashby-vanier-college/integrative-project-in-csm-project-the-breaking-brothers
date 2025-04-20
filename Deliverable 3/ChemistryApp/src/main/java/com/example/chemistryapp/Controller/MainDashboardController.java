@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.StackPane;
 
+/**
+ * Class to organize the different tabs
+ */
 public class MainDashboardController {
 
     @FXML
