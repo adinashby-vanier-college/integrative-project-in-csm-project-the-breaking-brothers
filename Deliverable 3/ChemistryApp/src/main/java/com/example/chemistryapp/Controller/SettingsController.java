@@ -123,20 +123,14 @@ public class SettingsController {
         fontSizeValue.setFont(Font.font(fontSize));
     }
 
-    public void handleResetPassword(ActionEvent actionEvent) {
 
-    }
 
     public void handleDeleteAccount(ActionEvent actionEvent) {
         try {
+            FirebaseAuth.getInstance().deleteUser(GlobalData.uid);
 
-            UserRecord userRecord = firebaseAuth.getUserByEmail(GlobalData.email);
-
-
-            String resetLink = firebaseAuth.generatePasswordResetLink(GlobalData.email);
-
-
-            System.out.println("Password reset link: " + resetLink);
+            System.exit(0);
+//            System.out.println("Password reset link: " + resetLink);
         } catch (FirebaseAuthException e) {
             if (e.getErrorCode().equals("auth/user-not-found")) {
                 System.out.println("No user found with this email address");

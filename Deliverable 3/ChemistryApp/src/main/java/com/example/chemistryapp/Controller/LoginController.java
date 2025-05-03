@@ -1,6 +1,7 @@
 package com.example.chemistryapp.Controller;
 
 import com.example.chemistryapp.Model.GlobalData;
+import com.google.firebase.auth.FirebaseToken;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javafx.fxml.FXML;
@@ -69,6 +70,8 @@ public class LoginController {
                     System.out.println("Login successful");
                     GlobalData.email = email;
                     GlobalData.isLoggedIn = true;
+                    String uid = jsonResponse.get("localId").getAsString();
+                    GlobalData.uid = uid;
 
                     OpenMainDashboard.openMainDashboard();
                 }

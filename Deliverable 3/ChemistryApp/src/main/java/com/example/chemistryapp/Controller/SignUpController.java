@@ -49,6 +49,8 @@ public class SignUpController {
             System.out.println("User successfully created: " + userRecord.getUid());
             GlobalData.email = email;
             GlobalData.isLoggedIn = true;
+
+            GlobalData.uid = userRecord.getUid();
             OpenMainDashboard.openMainDashboard();
 
             emailField.clear();
