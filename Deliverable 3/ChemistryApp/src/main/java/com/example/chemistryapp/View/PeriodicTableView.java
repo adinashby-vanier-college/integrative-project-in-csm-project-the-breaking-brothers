@@ -185,7 +185,6 @@ public class PeriodicTableView {
         detailStage.setScene(scene);
 
         StackPane root = new StackPane();
-        root.getChildren().add(borderPane); // your usual content
 
         detailStage.show();
     }

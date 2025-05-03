@@ -1,5 +1,5 @@
 962
-  -OEChem-04062520452D
+  -OEChem-05022521122D
 
   3  2  0     0  0  0  0  0  0999 V2000
     2.5369   -0.1550    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
@@ -64,6 +64,9 @@ H2O
 
 > <PUBCHEM_MOLECULAR_WEIGHT>
 18.015
+
+> <PUBCHEM_REFERENCE_STANDARDIZATION>
+Bypass - this structure was created from CID 139060668
 
 > <PUBCHEM_SMILES>
 O
