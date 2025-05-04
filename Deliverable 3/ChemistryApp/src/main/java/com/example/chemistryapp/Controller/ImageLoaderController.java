@@ -26,7 +26,7 @@ public class ImageLoaderController {
     private void handleLoad2D() {
         String moleculeFormula = moleculeInput.getText();
         if (moleculeFormula != null && !moleculeFormula.isEmpty()) {
-            loadMoleculeImage(moleculeFormula);
+            loadMoleculeImage(moleculeFormula, moleculeImage);
         } else {
             showAlert("Input Error", "Please enter a valid molecular formula.");
         }
@@ -43,7 +43,7 @@ public class ImageLoaderController {
         }
     }
 
-    private void loadMoleculeImage(String moleculeFormula) {
+    private void loadMoleculeImage(String moleculeFormula, ImageView moleculeImage1) {
 
         String urlString = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/" + moleculeFormula + "/PNG";
 
