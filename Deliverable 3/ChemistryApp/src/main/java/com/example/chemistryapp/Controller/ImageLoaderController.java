@@ -24,6 +24,19 @@ public class ImageLoaderController {
     private ImageView moleculeImage;
 
     @FXML
+    private void initialize() {
+        moleculeInput.setPromptText("Penicillin");
+        loadDefaultMolecule();
+    }
+
+    private void loadDefaultMolecule() {
+        String defaultMolecule = "Penicillin";
+
+        moleculeInput.setText(defaultMolecule);
+        loadMoleculeImage(defaultMolecule, image -> moleculeImage.setImage(image));
+    }
+
+    @FXML
     private void handleLoad2D() {
         String moleculeFormula = moleculeInput.getText();
         if (moleculeFormula != null && !moleculeFormula.isEmpty()) {
