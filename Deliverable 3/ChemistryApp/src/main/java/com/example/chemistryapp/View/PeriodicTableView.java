@@ -16,11 +16,19 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * This class is responsible for creating the visual elements necessary to display the periodic table
+ * @author Amir Zismanov
+ */
 
 public class PeriodicTableView {
 
     private StackPane root;
 
+    /**
+     * This method creates the periodic table, which is a set of buttons in a stack pane
+     * @return StackPane which makes the periodic table
+     */
     public StackPane InitializePeriodicTable () {
         PeriodicTableController elements = new PeriodicTableController();
 
@@ -34,7 +42,6 @@ public class PeriodicTableView {
         mainGrid.setHgap(2);
         mainGrid.setVgap(2);
         mainGrid.setAlignment(Pos.CENTER);
-
 
         for (Object[] element : elements.elementInfo()) {
             Button btn = createElementButton(
@@ -74,7 +81,6 @@ public class PeriodicTableView {
             ));
         }
 
-
         VBox tableContent = new VBox(10, title, mainGrid, lanthanides, actinides);
         tableContent.setAlignment(Pos.CENTER);
         tableContent.setPadding(new Insets(20));
@@ -83,6 +89,14 @@ public class PeriodicTableView {
         return root;
     }
 
+    /**
+     * This method creates each individual element (which is a button)
+     * @param symbol symbol of the element
+     * @param name name of the element
+     * @param number atomic number of the element
+     * @param color colour of the element's button depending on its placement in the periodic table
+     * @return a button, which acts as an element of the periodic table
+     */
     public Button createElementButton(String symbol, String name, int number, String color) {
         Button btn = new Button();
         btn.setPrefSize(70, 70);
@@ -108,6 +122,12 @@ public class PeriodicTableView {
         return btn;
     }
 
+    /**
+     * This method creates a popup to display the element details when the user clicks on an element
+     * @param atomicNumber atomic number of the element
+     * @param elementName the name of the element
+     * @param elementSymbol symbol of the element
+     */
     public void showElementDetails(int atomicNumber, String elementName, String elementSymbol) {
         PeriodicTableController elements = new PeriodicTableController();
         Object[][] detailArray = elements.getElementDetails(atomicNumber);
@@ -200,6 +220,12 @@ public class PeriodicTableView {
     }
 
 
+    /**
+     * This method gets the value (String) from the array that contains all of the information about each element such as density, boiling point, group, etc
+     * @param array containing all of the element data
+     * @param key the property that has to be retrieved
+     * @return A String value
+     */
     private String getValueFromArray(Object[][] array, String key) {
         for (Object[] row : array) {
             if (row[0].equals(key)) {
@@ -209,6 +235,13 @@ public class PeriodicTableView {
         return "N/A";
     }
 
+    /**
+     * This method adds the required information (in a 2 column format) into a grid pane
+     * @param grid grid pane used to show all element information
+     * @param row of the info in the grid
+     * @param label of the info
+     * @param value string of the value to put for the label
+     */
     public void addInfoRow(GridPane grid, int row, String label, String value) {
         Label infoLabel = new Label(label);
         infoLabel.setStyle("-fx-font-weight: bold;");
