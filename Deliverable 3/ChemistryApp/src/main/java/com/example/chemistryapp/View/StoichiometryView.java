@@ -1,9 +1,11 @@
 package com.example.chemistryapp.View;
 
+import com.example.chemistryapp.Controller.ImageLoaderController;
 import com.example.chemistryapp.Controller.StoichiometryController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 
 public class StoichiometryView {
     public BorderPane initializeStoichiometry() {
+        ImageView moleculeView = new ImageView(); // ImageViewer for molecules
+        ImageLoaderController imageloaderController = new ImageLoaderController();
         StoichiometryController stoichio = new StoichiometryController();
         CustomMenuBarView customMenuBarView = new CustomMenuBarView();
         BorderPane root = new BorderPane();
@@ -46,7 +50,30 @@ public class StoichiometryView {
         Button view5 = styleButton("View");
         Button view6 = styleButton("View");
 
-        view1.setOnAction(e -> System.out.println("Button Pressed"));
+        view1.setOnAction(e -> {
+            imageloaderController.loadMoleculeImage(molecule1.getText(), image -> moleculeView.setImage(image));
+
+        });
+
+        view2.setOnAction(e -> {
+            imageloaderController.loadMoleculeImage(molecule2.getText(), image -> moleculeView.setImage(image));
+        });
+
+        view3.setOnAction(e -> {
+            imageloaderController.loadMoleculeImage(molecule3.getText(), image -> moleculeView.setImage(image));
+        });
+
+        view4.setOnAction(e -> {
+            imageloaderController.loadMoleculeImage(molecule4.getText(), image -> moleculeView.setImage(image));
+        });
+
+        view5.setOnAction(e -> {
+            imageloaderController.loadMoleculeImage(molecule5.getText(), image -> moleculeView.setImage(image));
+        });
+
+        view6.setOnAction(e -> {
+            imageloaderController.loadMoleculeImage(molecule6.getText(), image -> moleculeView.setImage(image));
+        });
 
         TextField mass1 = new TextField();
         TextField mass2 = new TextField();
@@ -61,7 +88,7 @@ public class StoichiometryView {
         mass5.setPromptText("Enter Mass (in g)");
         mass6.setPromptText("Enter Mass (in g)");
 
-        TextField moles1 = new TextField();
+        /*TextField moles1 = new TextField();
         TextField moles2 = new TextField();
         TextField moles3 = new TextField();
         TextField moles4 = new TextField();
@@ -72,7 +99,7 @@ public class StoichiometryView {
         moles3.setPromptText("Enter amount of Moles");
         moles4.setPromptText("Enter amount of Moles");
         moles5.setPromptText("Enter amount of Moles");
-        moles6.setPromptText("Enter amount of Moles");
+        moles6.setPromptText("Enter amount of Moles");*/
 
         TextField energy1 = new TextField();
         TextField energy2 = new TextField();
@@ -107,61 +134,97 @@ public class StoichiometryView {
             ArrayList<String> reactants = new ArrayList<>();
             ArrayList<String> products = new ArrayList<>();
 
-
-            // TODO Create a better way to add shit to the reactants and products array
             // Collect inputs properly
-            if (molecule1 != null && molecule1.getText() != null) {
+            if (!molecule1.getText().isEmpty()) {
                 reactants.add(molecule1.getText());
             }
-            if (molecule2 != null) {
+            if (!molecule2.getText().isEmpty()) {
                 reactants.add(molecule2.getText());
             }
-            if (molecule3 != null) {
-                products.add(molecule3.getText());
+            if (!molecule3.getText().isEmpty()) {
+                reactants.add(molecule3.getText());
             }
-            if (molecule4 != null) {
+            if (!molecule4.getText().isEmpty()) {
                 products.add(molecule4.getText());
             }
+            if (!molecule5.getText().isEmpty()) {
+                products.add(molecule5.getText());
+            }
+            if (!molecule6.getText().isEmpty()) {
+                products.add(molecule6.getText());
+            }
+
+            System.out.println(molecule3.getText());
+            System.out.println(reactants);
+            System.out.println(products);
+
+            try {
+                ArrayList<ArrayList<String>> balancedEquation = stoichio.getBalancedEquation(
+                        stoichio.rref(
+                                stoichio.createMatrix(reactants, products,
+                                        stoichio.getUniqueElements(reactants))
+                        ),
+                        reactants,
+                        products
+                );
+
+                System.out.println(balancedEquation);
+
+                // Replacing the updated Molecules
+                molecule1.setText(balancedEquation.get(0).get(0));
+                molecule2.setText(balancedEquation.get(0).get(1));
+                molecule3.setText(balancedEquation.get(0).get(2));
+                molecule4.setText(balancedEquation.get(1).get(0));
+                molecule5.setText(balancedEquation.get(1).get(1));
+                molecule6.setText(balancedEquation.get(1).get(2));
+
+                System.out.println("Solved!");
+                System.out.println(balancedEquation);
+            }
+            catch (Exception stoichioException) {
+                System.out.println("Invalid Equation. Try Again.");
+                // stoichio.errorBox("Equation");
+            }
+
+            try {
+                ArrayList<String> solvedMass = stoichio.missingFieldCalculator(mass1, mass2, mass3, mass4, mass5, mass6);
+                System.out.println(solvedMass);
+                mass1.setText(solvedMass.get(0));
+                mass2.setText(solvedMass.get(1));
+                mass3.setText(solvedMass.get(2));
+                mass4.setText(solvedMass.get(3));
+            }
+            catch (Exception solvedMassException) {
+                System.out.println("Invalid Masses. Try Again.");
+                // stoichio.errorBox("Masses");
+            }
+
+            try {
+                ArrayList<String> solvedEnergy = stoichio.missingFieldCalculator(energy1, energy2, energy3, energy4, energy5, energy6);
+                energy1.setText(solvedEnergy.get(0));
+                energy2.setText(solvedEnergy.get(1));
+                energy3.setText(solvedEnergy.get(2));
+                energy4.setText(solvedEnergy.get(3));
+            }
+            catch (Exception solvedEnergyException) {
+                System.out.println("Invalid Energies. Try Again.");
+                // stoichio.errorBox("Energies");
+            }
 
 
-            ArrayList<String> balancedEquation = stoichio.getBalancedEquation(
-                    stoichio.rref(
-                            stoichio.createMatrix(reactants, products,
-                                    stoichio.getUniqueElements(molecule1.getText(), molecule2.getText()))
-                    ),
-                    reactants,
-                    products
-            );
+            try {
+                ArrayList<String> solvedConcentration = stoichio.missingFieldCalculator(concentration1, concentration2,
+                        concentration3, concentration4, concentration5, concentration6);
+                concentration1.setText(solvedConcentration.get(0));
+                concentration2.setText(solvedConcentration.get(1));
+                concentration3.setText(solvedConcentration.get(2));
+                concentration4.setText(solvedConcentration.get(3));
 
-            // Replacing the updated Molecules
-            // TODO MAKE A BETTER WAY TO SET TEXT
-            if (balancedEquation.size() >= 1) molecule1.setText(balancedEquation.get(0));
-            if (balancedEquation.size() >= 2) molecule2.setText(balancedEquation.get(1));
-            if (balancedEquation.size() >= 3) molecule3.setText(balancedEquation.get(2));
-            if (balancedEquation.size() >= 4) molecule4.setText(balancedEquation.get(3));
-
-            System.out.println("Solved!");
-            System.out.println(balancedEquation);
-
-
-            ArrayList<String> solvedMass = stoichio.missingFieldCalculator(mass1, mass2, mass3, mass4);
-            System.out.println(solvedMass);
-            mass1.setText(solvedMass.get(0));
-            mass2.setText(solvedMass.get(1));
-            mass3.setText(solvedMass.get(2));
-            mass4.setText(solvedMass.get(3));
-
-            ArrayList<String> solvedEnergy = stoichio.missingFieldCalculator(energy1, energy2, energy3, energy4);
-            energy1.setText(solvedEnergy.get(0));
-            energy2.setText(solvedEnergy.get(1));
-            energy3.setText(solvedEnergy.get(2));
-            energy4.setText(solvedEnergy.get(3));
-
-            ArrayList<String> solvedConcentration = stoichio.missingFieldCalculator(concentration1, concentration2, concentration3, concentration4);
-            concentration1.setText(solvedConcentration.get(0));
-            concentration2.setText(solvedConcentration.get(1));
-            concentration3.setText(solvedConcentration.get(2));
-            concentration4.setText(solvedConcentration.get(3));
+            }
+            catch (Exception solvedConcentrationException) {
+                System.out.println("Invalid Concentrations. Try Again.");
+                // stoichio.errorBox("Concentrations");
+            }
 
         });
 
@@ -192,26 +255,26 @@ public class StoichiometryView {
         gridPane.add(mass5, 8,2);
         gridPane.add(mass6, 10,2);
 
-        gridPane.add(moles1, 0, 3);
+        /*gridPane.add(moles1, 0, 3);
         gridPane.add(moles2, 2, 3);
         gridPane.add(moles3, 4, 3);
         gridPane.add(moles4, 6, 3);
         gridPane.add(moles5, 8, 3);
-        gridPane.add(moles6, 10, 3);
+        gridPane.add(moles6, 10, 3);*/
 
-        gridPane.add(energy1, 0, 4);
-        gridPane.add(energy2, 2, 4);
-        gridPane.add(energy3, 4, 4);
-        gridPane.add(energy4, 6, 4);
-        gridPane.add(energy5, 8, 4);
-        gridPane.add(energy6, 10, 4);
+        gridPane.add(energy1, 0, 3);
+        gridPane.add(energy2, 2, 3);
+        gridPane.add(energy3, 4, 3);
+        gridPane.add(energy4, 6, 3);
+        gridPane.add(energy5, 8, 3);
+        gridPane.add(energy6, 10, 3);
 
-        gridPane.add(concentration1, 0, 5);
-        gridPane.add(concentration2, 2, 5);
-        gridPane.add(concentration3, 4, 5);
-        gridPane.add(concentration4, 6, 5);
-        gridPane.add(concentration5, 8, 5);
-        gridPane.add(concentration6, 10, 5);
+        gridPane.add(concentration1, 0, 4);
+        gridPane.add(concentration2, 2, 4);
+        gridPane.add(concentration3, 4, 4);
+        gridPane.add(concentration4, 6, 4);
+        gridPane.add(concentration5, 8, 4);
+        gridPane.add(concentration6, 10, 4);
 
         gridPane.setAlignment(Pos.CENTER);
 
@@ -221,6 +284,7 @@ public class StoichiometryView {
 
         root.setCenter(stoichiometryVBox);
         root.setTop(customMenuBarView.initializeMenuBar());
+        root.setBottom(moleculeView); // TODO REMOVE SO IT BECOMES A WINDOW
 
         return root;
     }
@@ -229,7 +293,7 @@ public class StoichiometryView {
     private TextField styleTextField(String promptText) {
         TextField textField = new TextField();
         textField.setPromptText(promptText);
-        textField.setStyle("-fx-min-width: 364px; -fx-max-width: 364px; -fx-min-height: 45px; " +
+        textField.setStyle("-fx-min-width: 170px; -fx-max-width: 170px; -fx-min-height: 45px; " +
                 "-fx-border-color: lightgray; -fx-padding: 10px; -fx-border-radius: 7px; -fx-background-radius: 7px;");
         return textField;
     }
@@ -238,7 +302,7 @@ public class StoichiometryView {
     private Button styleButton(String text) {
         Button button = new Button(text);
         button.setStyle("-fx-background-color: #386641; -fx-text-fill: white; -fx-font-weight: bold; " +
-                "-fx-font-size: 14px; -fx-min-width: 364px; -fx-max-width: 364px; -fx-min-height: 45px; " +
+                "-fx-font-size: 14px; -fx-min-width: 170px; -fx-max-width: 170px; -fx-min-height: 45px; " +
                 "-fx-border-radius: 10px; -fx-alignment: center; -fx-padding: 10px;");
         return button;
     }

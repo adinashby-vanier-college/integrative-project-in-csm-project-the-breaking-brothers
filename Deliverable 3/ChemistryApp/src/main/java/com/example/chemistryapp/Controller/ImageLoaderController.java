@@ -10,6 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.function.Consumer;
 
 /**
  * Class to load 2d Image of molecule
@@ -26,7 +27,7 @@ public class ImageLoaderController {
     private void handleLoad2D() {
         String moleculeFormula = moleculeInput.getText();
         if (moleculeFormula != null && !moleculeFormula.isEmpty()) {
-            loadMoleculeImage(moleculeFormula);
+            loadMoleculeImage(moleculeFormula, image -> moleculeImage.setImage(image));
         } else {
             showAlert("Input Error", "Please enter a valid molecular formula.");
         }
@@ -43,24 +44,17 @@ public class ImageLoaderController {
         }
     }
 
-    private void loadMoleculeImage(String moleculeFormula) {
-
+    public void loadMoleculeImage(String moleculeFormula, Consumer<Image> callback) {
         String urlString = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/" + moleculeFormula + "/PNG";
 
-        // cannot run in background for some reason, had to make a thread
         new Thread(() -> {
             try {
-                // send request
                 HttpURLConnection connection = (HttpURLConnection) new URL(urlString).openConnection();
                 connection.setRequestMethod("GET");
 
-                // read response
                 try (InputStream in = connection.getInputStream()) {
-                    // image to load the molecule image 2D
                     Image moleculeImageData = new Image(in);
-                    Platform.runLater(() -> {
-                        moleculeImage.setImage(moleculeImageData); // Update the ImageView
-                    });
+                    Platform.runLater(() -> callback.accept(moleculeImageData)); // Pass it back via callback
                 } catch (Exception e) {
                     Platform.runLater(() -> showAlert("Error", "Failed to load molecule image."));
                 }
@@ -69,6 +63,7 @@ public class ImageLoaderController {
             }
         }).start();
     }
+
 
     private void showAlert(String title, String message) {
         // Alert dialog

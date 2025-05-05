@@ -1,11 +1,19 @@
 package com.example.chemistryapp.Controller;
 
 
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class StoichiometryController {
+    /**
+     * Takes in the formula of a molecule and returns an arraylist of subscripts, each entry being the subscript of an atom
+     * @param formula formula of a molecule (e.g: H2O2)
+     * @return an ArrayList of subscripts (e.g: [2,2])
+     */
     public ArrayList<Integer> getElementSubscripts(String formula) {
         ArrayList<String> elements = new ArrayList<>(); // For each molecule, it creates a list of elements in it; e.g. [Ca, C, O]
         ArrayList<Integer> counts = new ArrayList<>(); // For each molecule, it creates a list of numbers corresponding to how many of that element is in the molecule
@@ -48,13 +56,21 @@ public class StoichiometryController {
         return result;
     }
 
-    public ArrayList<String> getUniqueElements(String molecule1, String molecule2) { // TODO ArrayList reactants
+    /**
+     * Finds all the unique elements from the array of reactants
+     * @param reactants ArrayList of reactants (e.g.: [H2, O2, CO])
+     * @return an ArrayList of unique, unrepeated elements (e.g.: [H, O, C])
+     */
+    public ArrayList<String> getUniqueElements(ArrayList<String> reactants) {
         ArrayList<String> elements = new ArrayList<>();
 
         // Allows the program to find all the elements in the equation.
-        // TODO Create a loop that does the extract element for all in the reactants arrayList
-        extractElements(molecule1, elements);
-        extractElements(molecule2, elements);
+        /*extractElements(molecule1, elements);
+        extractElements(molecule2, elements);*/
+
+        for (int i = 0; i < reactants.size(); i++) {
+            extractElements(reactants.get(i), elements);
+        }
 
         // Only adds unique elements, doesn't add common elements
         ArrayList<String> uniqueElements = new ArrayList<>();
@@ -68,6 +84,11 @@ public class StoichiometryController {
         return uniqueElements;
     }
 
+    /**
+     * Finds all elements in a molecule
+     * @param molecule formula of a molecule to scan through
+     * @param elements an empty ArrayList that gets filled up with elements
+     */
     private void extractElements(String molecule, ArrayList<String> elements) {
         StringBuilder element = new StringBuilder();
 
@@ -94,6 +115,13 @@ public class StoichiometryController {
         }
     }
 
+    /**
+     * Creates a matrix to balance a chemical equation
+     * @param reactants ArrayList of reactant molecules as each column represents a reactant
+     * @param products ArrayList of product molecules as each column represents a product
+     * @param elements ArrayList of Unique elements as each row is equal to an element
+     * @return
+     */
     public double[][] createMatrix(ArrayList<String> reactants, ArrayList<String> products, ArrayList<String> elements) {
         int rowCount = elements.size();
         int colCount = reactants.size() + products.size();
@@ -127,6 +155,11 @@ public class StoichiometryController {
         return matrix;
     }
 
+    /**
+     * From a molecule it creates an ArrayList of each element's symbol.
+     * @param formula String of a Molecule
+     * @return an ArrayList of element symboles
+     */
     public ArrayList<String> getElementSymbols(String formula) {
         ArrayList<String> elements = new ArrayList<>();
         int i = 0;
@@ -152,6 +185,11 @@ public class StoichiometryController {
     }
 
 
+    /**
+     * Uses a Reduced-Row Echelon Form algorithm to solve a matrix
+     * @param matrix a matrix set up previously to balance a chemical equation
+     * @return a matrix in RREF format
+     */
     public double[][] rref(double[][] matrix) {
         int rowCount = matrix.length;
         int colCount = matrix[0].length;
@@ -212,8 +250,17 @@ public class StoichiometryController {
         return a * (b / gcd(a, b));
     }
 
-    public ArrayList<String> getBalancedEquation(double[][] rrefMatrix, ArrayList<String> reactants, ArrayList<String> products) {
-        int totalMolecules = reactants.size() + products.size();
+    /**
+     * Using a matrix in RREF, it uses a free variable to create a balanced equation.
+     * @param rrefMatrix Matrix in RREF
+     * @param reactants An ArrayList of Reactants so that the size of the updated ArrayList of balanced reactants doesn't
+     *                  exceed the original
+     * @param products An ArrayList of Reactants so that the size of the updated ArrayList of balanced products doesn't
+     *                 exceed the original
+     * @return an ArrayList containing an ArrayList of balanced Reactants and an ArrayList of balanced Products
+     */
+    public ArrayList<ArrayList<String>> getBalancedEquation(double[][] rrefMatrix, ArrayList<String> reactants, ArrayList<String> products) {
+        int totalMolecules = rrefMatrix[0].length; // rrefMatrix[0].length is the amount of molecules in the first row.
         ArrayList<Double> rawCoefficients = new ArrayList<>(); // Coefficients from the RREF Matrix
 
         // Put all values in the rawCoefficient ArrayList as 0 so it's easier to change later
@@ -225,7 +272,7 @@ public class StoichiometryController {
         rawCoefficients.set(totalMolecules - 1, 1.0);
 
         // Replaces the 0s in rawCoefficients with actual numbers by solving equations thanks to the free variable
-        for (int i = totalMolecules - 2; i >= 0; i--) {
+        for (int i = totalMolecules - 2; i >= 0; i--) { // int i = totalMolecules -2
             double sum = 0.0;
             for (int j = i + 1; j < totalMolecules; j++) {
                 sum += rrefMatrix[i][j] * rawCoefficients.get(j);
@@ -263,27 +310,67 @@ public class StoichiometryController {
 
         // Adding all coefficients to the molecules and adding them into an ArrayList that will be returned
         ArrayList<String> balancedMolecules = new ArrayList<>();
+        ArrayList<String> balancedReactants = new ArrayList<>();
+        ArrayList<String> balancedProducts = new ArrayList<>();
 
         for (int i = 0; i < reactants.size(); i++) {
             int coeff = finalCoefficients.get(i);
             String balanced = (coeff != 1 ? coeff : "") + reactants.get(i);
-            balancedMolecules.add(balanced);
+            balancedReactants.add(balanced);
         }
 
         for (int i = 0; i < products.size(); i++) {
             int coeff = finalCoefficients.get(i + reactants.size());
             String balanced = (coeff != 1 ? coeff : "") + products.get(i);
-            balancedMolecules.add(balanced);
+            balancedProducts.add(balanced);
         }
 
-        // TODO: FIND A WAY TO RETURN REACTANTS AND PRODUCTS SEPARETELY
-        return balancedMolecules;
+
+        // Adding empty strings to later be placed in the unused slots
+        if (balancedReactants.size() < 2) {
+            balancedReactants.add("");
+            balancedReactants.add("");
+            System.out.println("REACTANT - 2 empty Strings added");
+        }
+
+        if (balancedReactants.size() < 3) {
+            balancedReactants.add("");
+            System.out.println("REACTANT - 1 empty string added");
+        }
+
+        if (balancedProducts.size() < 2) {
+            balancedProducts.add("");
+            balancedProducts.add("");
+            System.out.println("PRODUCT - 2 empty Strings added");
+        }
+        if (balancedProducts.size() < 3) {
+            balancedProducts.add("");
+            System.out.println("PRODUCT - 1 empty string added");
+        }
+
+        ArrayList<ArrayList<String>> balancedReactantsAndProducts = new ArrayList<>();
+        balancedReactantsAndProducts.add(balancedReactants);
+        balancedReactantsAndProducts.add(balancedProducts);
+
+        return balancedReactantsAndProducts;
     }
 
-    public ArrayList<String> missingFieldCalculator(TextField molecule1, TextField molecule2, TextField molecule3, TextField molecule4) {
-        TextField[] textFields = {molecule1, molecule2, molecule3, molecule4};
+    /**
+     * Takes in concentration, energy or mass and finds the missing input. Replaces the missing input through simple
+     *  addition and substraction
+     * @param molecule1 TextField containing a numerical value of concentration, energy or mass
+     * @param molecule2 TextField containing a numerical value of concentration, energy or mass
+     * @param molecule3 TextField containing a numerical value of concentration, energy or mass
+     * @param molecule4 TextField containing a numerical value of concentration, energy or mass
+     * @param molecule5 TextField containing a numerical value of concentration, energy or mass
+     * @param molecule6 TextField containing a numerical value of concentration, energy or mass
+     * @return An updated arraylist of all the fields including missing value
+     */
+    public ArrayList<String> missingFieldCalculator(TextField molecule1, TextField molecule2, TextField molecule3,
+                                                    TextField molecule4, TextField molecule5, TextField molecule6) {
+        TextField[] textFields = {molecule1, molecule2, molecule3, molecule4, molecule5, molecule6};
         int emptyFieldPosition = -1;
-        Double[] values = new Double[4];
+        Double[] values = new Double[6];
 
         for (int i = 0; i < textFields.length; i++) {
             String text = textFields[i].getText().trim();
@@ -297,21 +384,24 @@ public class StoichiometryController {
 
         double missingValue = 0;
         switch (emptyFieldPosition) {
-            case 0: // r1 missing
-                missingValue =  values[2] + values[3] - values[1];
+            case 0: // Reactant 1 missing
+                missingValue = (values[3] + values[4] + values[5]) - (values[1] + values[2]);
                 break;
-            case 1: // r2 missing
-                missingValue = values[2] + values[3] - values[0];
+            case 1: // Reactant 2 missing
+                missingValue = (values[3] + values[4] + values[5]) - (values[0] + values[2]);
                 break;
-            case 2: // p1 missing
-                missingValue = values[0] + values[1] - values[3];
+            case 2: // Reactant 3 missing
+                missingValue = (values[3] + values[4] + values[5]) - (values[0] + values[1]);
                 break;
-            case 3: // p2 missing
-                missingValue = values[0] + values[1] - values[2];
+            case 3: // Product 1 missing
+                missingValue = (values[0] + values[1] + values[2]) - (values[4] + values[5]);
                 break;
-            default:
-                System.out.println("Unexpected error.");
-                return null;
+            case 4: // Product 2 missing
+                missingValue = (values[0] + values[1] + values[2]) - (values[3] + values[5]);
+                break;
+            case 5: // Product 3 missing
+                missingValue = (values[0] + values[1] + values[2]) - (values[3] + values[4]);
+                break;
         }
         if (textFields[emptyFieldPosition] != null) {
             textFields[emptyFieldPosition].setText(String.valueOf(missingValue));
@@ -323,5 +413,16 @@ public class StoichiometryController {
             result.add(String.valueOf(v));
         }
         return result;
+    }
+    public void errorBox(String exceptionName) {
+        Stage stage = new Stage();
+        stage.setTitle("Error.");
+
+        TextField errorMessage = new TextField("Invalid " + exceptionName + ". Please Try Again.");
+        errorMessage.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(errorMessage, 100, 100);
+        stage.setScene(scene);
+        stage.show();
     }
 }
