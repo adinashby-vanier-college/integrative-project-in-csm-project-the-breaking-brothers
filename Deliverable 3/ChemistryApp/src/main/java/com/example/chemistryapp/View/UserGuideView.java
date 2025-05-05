@@ -96,7 +96,7 @@ public class UserGuideView {
 
         VBox leftButtons = new VBox(molecule, periodicTable, stoichiometry, pHpOHCalculator, idealGasCalculator);
         VBox rightButtons = new VBox(realGasCalculator, acidBaseCalculator, gibbsFreeEnergyCalculator, reactionGraphViewer, password);
-
+        //hi
         leftButtons.setSpacing(10);
         rightButtons.setSpacing(10);
         leftButtons.setAlignment(Pos.CENTER);
@@ -157,7 +157,7 @@ public class UserGuideView {
 
         closeButton.setOnAction(e -> root.getChildren().removeAll(backdrop, popupPane));
         backdrop.setOnMouseClicked(e -> root.getChildren().removeAll(backdrop, popupPane));
-        
+
         StackPane.setAlignment(popupPane, Pos.CENTER);
         root.getChildren().addAll(backdrop, popupPane);
     }
