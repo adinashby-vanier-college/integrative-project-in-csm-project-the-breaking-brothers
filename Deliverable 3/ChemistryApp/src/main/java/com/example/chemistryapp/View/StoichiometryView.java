@@ -49,9 +49,12 @@ public class StoichiometryView {
         Button view5 = styleButton("View");
         Button view6 = styleButton("View");
 
-        /*view1.setOnAction(e ->
+        ImageLoaderController imageloaderController = new ImageLoaderController();
+        view1.setOnAction(e -> {
+            imageloaderController.loadMoleculeImage(molecule1.getText(), image -> moleculeView.setImage(image));
 
-        )*/;
+        }
+        );
 
         TextField mass1 = new TextField();
         TextField mass2 = new TextField();
@@ -261,6 +264,7 @@ public class StoichiometryView {
 
         root.setCenter(stoichiometryVBox);
         root.setTop(customMenuBarView.initializeMenuBar());
+        root.setBottom(moleculeView);
 
         return root;
     }
