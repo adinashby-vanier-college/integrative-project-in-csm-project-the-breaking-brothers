@@ -54,7 +54,10 @@ public class UserGuideView {
         stoichiometry.setOnAction(e -> showPopup(
                 "How to use the stoichiometry calculator?",
                 "1. Click on the **\"Stoichiometry\"** tab.\n" +
-                        "2. ."
+                        "2. The stoichiometry calculator does not accept molecules with repeating atoms like CH3COOH.\n" +
+                        "3. When calculating masses, concentrations or energy, please enter a 0 in the unused slots instead of leaving it blank.\n" +
+                        "4. The calculator is case sensitive.\n" +
+                        "5. Once you have entered all the data, press solve."
         ));
 
         Button pHpOHCalculator = new Button("How to use the pH and pOH calculator?");

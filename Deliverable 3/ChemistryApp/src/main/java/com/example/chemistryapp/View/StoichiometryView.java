@@ -50,29 +50,35 @@ public class StoichiometryView {
         Button view5 = styleButton("View");
         Button view6 = styleButton("View");
 
+        // When the view button is clicked, it creates a popup
         view1.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule1.getText(), image -> moleculeView.setImage(image));
-
+            stoichio.moleculeViewerScreen(moleculeView);
         });
 
         view2.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule2.getText(), image -> moleculeView.setImage(image));
+            stoichio.moleculeViewerScreen(moleculeView);
         });
 
         view3.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule3.getText(), image -> moleculeView.setImage(image));
+            stoichio.moleculeViewerScreen(moleculeView);
         });
 
         view4.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule4.getText(), image -> moleculeView.setImage(image));
+            stoichio.moleculeViewerScreen(moleculeView);
         });
 
         view5.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule5.getText(), image -> moleculeView.setImage(image));
+            stoichio.moleculeViewerScreen(moleculeView);
         });
 
         view6.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule6.getText(), image -> moleculeView.setImage(image));
+            stoichio.moleculeViewerScreen(moleculeView);
         });
 
         TextField mass1 = new TextField();
@@ -87,19 +93,6 @@ public class StoichiometryView {
         mass4.setPromptText("Enter Mass (in g)");
         mass5.setPromptText("Enter Mass (in g)");
         mass6.setPromptText("Enter Mass (in g)");
-
-        /*TextField moles1 = new TextField();
-        TextField moles2 = new TextField();
-        TextField moles3 = new TextField();
-        TextField moles4 = new TextField();
-        TextField moles5 = new TextField();
-        TextField moles6 = new TextField();
-        moles1.setPromptText("Enter amount of Moles");
-        moles2.setPromptText("Enter amount of Moles");
-        moles3.setPromptText("Enter amount of Moles");
-        moles4.setPromptText("Enter amount of Moles");
-        moles5.setPromptText("Enter amount of Moles");
-        moles6.setPromptText("Enter amount of Moles");*/
 
         TextField energy1 = new TextField();
         TextField energy2 = new TextField();
@@ -283,8 +276,8 @@ public class StoichiometryView {
         stoichiometryVBox.getChildren().addAll(gridPane, solve);
 
         root.setCenter(stoichiometryVBox);
-        root.setTop(customMenuBarView.initializeMenuBar());
-        root.setBottom(moleculeView); // TODO REMOVE SO IT BECOMES A WINDOW
+        //root.setTop(customMenuBarView.initializeMenuBar());
+        // root.setBottom(moleculeView);
 
         return root;
     }
