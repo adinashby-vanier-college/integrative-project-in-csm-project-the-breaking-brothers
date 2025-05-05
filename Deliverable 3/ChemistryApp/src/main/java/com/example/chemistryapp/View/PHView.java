@@ -19,7 +19,8 @@ public class PHView {
 
         // ComboBox to allow user to choose the type of conversion they want
         ComboBox<String> conversionChoice = new ComboBox<>();
-        conversionChoice.getItems().addAll("pH -> pOH", "pOH -> pH");
+        conversionChoice.getItems().addAll("pH -> pOH", "pOH -> pH", "H3O+ Concentration -> pH",
+                "pH -> H3O+ Concentration", "OH- Concentration -> pOH", "pOH -> OH- Concentration");
         conversionChoice.setPromptText("--Choose Conversion Type--");
 
         TextField userInput = new TextField();
@@ -55,6 +56,42 @@ public class PHView {
                 solve.setOnAction(f -> {
                     String convertedResult = ""+ phcalc.convertTopH(Double.parseDouble(userInput.getText()));
                     result.setText(convertedResult);
+                });
+            }
+
+            else if ("H3O+ Concentration -> pH".equals(selectedConversion)) {
+                userInput.setPromptText("Enter H3O+ Concentration");
+
+                solve.setOnAction( f -> {
+                    String pH = "" + phcalc.H30ConcentrationTopH(Double.parseDouble(userInput.getText()));
+                    result.setText(pH);
+                });
+            }
+
+            else if ("pH -> H3O+ Concentration".equals(selectedConversion)) {
+                userInput.setPromptText("Enter pH");
+
+                solve.setOnAction(f -> {
+                    String concentration = phcalc.pHToH30Concentration(Double.parseDouble(userInput.getText())) + " mol/L";
+                    result.setText(concentration);
+                });
+            }
+
+            else if ("OH- Concentration -> pOH".equals(selectedConversion)) {
+                userInput.setPromptText("Enter OH- Concentration");
+
+                solve.setOnAction(f -> {
+                    String pOH = "" + phcalc.OHConcentrationTopOH(Double.parseDouble(userInput.getText()));
+                    result.setText(pOH);
+                });
+            }
+
+            else if ("pOH -> OH- Concentration".equals(selectedConversion)) {
+                userInput.setPromptText("Enter pOH");
+
+                solve.setOnAction(f -> {
+                    String concentration = phcalc.pOHToOHConcentration(Double.parseDouble(userInput.getText())) + " mol/L";
+                    result.setText(concentration);
                 });
             }
         });

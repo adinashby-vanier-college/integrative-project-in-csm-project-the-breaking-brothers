@@ -355,10 +355,22 @@ public class StoichiometryController {
         return balancedReactantsAndProducts;
     }
 
-    public ArrayList<String> missingFieldCalculator(TextField molecule1, TextField molecule2, TextField molecule3, TextField molecule4) {
-        TextField[] textFields = {molecule1, molecule2, molecule3, molecule4};
+    /**
+     * Takes in concentration, energy or mass and finds the missing input. Replaces the missing input through simple
+     *  addition and substraction
+     * @param molecule1 TextField containing a numerical value of concentration, energy or mass
+     * @param molecule2 TextField containing a numerical value of concentration, energy or mass
+     * @param molecule3 TextField containing a numerical value of concentration, energy or mass
+     * @param molecule4 TextField containing a numerical value of concentration, energy or mass
+     * @param molecule5 TextField containing a numerical value of concentration, energy or mass
+     * @param molecule6 TextField containing a numerical value of concentration, energy or mass
+     * @return An updated arraylist of all the fields including missing value
+     */
+    public ArrayList<String> missingFieldCalculator(TextField molecule1, TextField molecule2, TextField molecule3,
+                                                    TextField molecule4, TextField molecule5, TextField molecule6) {
+        TextField[] textFields = {molecule1, molecule2, molecule3, molecule4, molecule5, molecule6};
         int emptyFieldPosition = -1;
-        Double[] values = new Double[4];
+        Double[] values = new Double[6];
 
         for (int i = 0; i < textFields.length; i++) {
             String text = textFields[i].getText().trim();
@@ -372,21 +384,24 @@ public class StoichiometryController {
 
         double missingValue = 0;
         switch (emptyFieldPosition) {
-            case 0: // r1 missing
-                missingValue =  values[2] + values[3] - values[1];
+            case 0: // Reactant 1 missing
+                missingValue = (values[3] + values[4] + values[5]) - (values[1] + values[2]);
                 break;
-            case 1: // r2 missing
-                missingValue = values[2] + values[3] - values[0];
+            case 1: // Reactant 2 missing
+                missingValue = (values[3] + values[4] + values[5]) - (values[0] + values[2]);
                 break;
-            case 2: // p1 missing
-                missingValue = values[0] + values[1] - values[3];
+            case 2: // Reactant 3 missing
+                missingValue = (values[3] + values[4] + values[5]) - (values[0] + values[1]);
                 break;
-            case 3: // p2 missing
-                missingValue = values[0] + values[1] - values[2];
+            case 3: // Product 1 missing
+                missingValue = (values[0] + values[1] + values[2]) - (values[4] + values[5]);
                 break;
-            default:
-                System.out.println("Unexpected error.");
-                return null;
+            case 4: // Product 2 missing
+                missingValue = (values[0] + values[1] + values[2]) - (values[3] + values[5]);
+                break;
+            case 5: // Product 3 missing
+                missingValue = (values[0] + values[1] + values[2]) - (values[3] + values[4]);
+                break;
         }
         if (textFields[emptyFieldPosition] != null) {
             textFields[emptyFieldPosition].setText(String.valueOf(missingValue));

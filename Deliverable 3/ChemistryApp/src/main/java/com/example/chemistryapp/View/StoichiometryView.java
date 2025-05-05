@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class StoichiometryView {
     public BorderPane initializeStoichiometry() {
         ImageView moleculeView = new ImageView(); // ImageViewer for molecules
+        ImageLoaderController imageloaderController = new ImageLoaderController();
         StoichiometryController stoichio = new StoichiometryController();
         CustomMenuBarView customMenuBarView = new CustomMenuBarView();
         BorderPane root = new BorderPane();
@@ -49,12 +50,30 @@ public class StoichiometryView {
         Button view5 = styleButton("View");
         Button view6 = styleButton("View");
 
-        ImageLoaderController imageloaderController = new ImageLoaderController();
         view1.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule1.getText(), image -> moleculeView.setImage(image));
 
-        }
-        );
+        });
+
+        view2.setOnAction(e -> {
+            imageloaderController.loadMoleculeImage(molecule2.getText(), image -> moleculeView.setImage(image));
+        });
+
+        view3.setOnAction(e -> {
+            imageloaderController.loadMoleculeImage(molecule3.getText(), image -> moleculeView.setImage(image));
+        });
+
+        view4.setOnAction(e -> {
+            imageloaderController.loadMoleculeImage(molecule4.getText(), image -> moleculeView.setImage(image));
+        });
+
+        view5.setOnAction(e -> {
+            imageloaderController.loadMoleculeImage(molecule5.getText(), image -> moleculeView.setImage(image));
+        });
+
+        view6.setOnAction(e -> {
+            imageloaderController.loadMoleculeImage(molecule6.getText(), image -> moleculeView.setImage(image));
+        });
 
         TextField mass1 = new TextField();
         TextField mass2 = new TextField();
@@ -168,7 +187,7 @@ public class StoichiometryView {
             }
 
             try {
-                ArrayList<String> solvedMass = stoichio.missingFieldCalculator(mass1, mass2, mass3, mass4);
+                ArrayList<String> solvedMass = stoichio.missingFieldCalculator(mass1, mass2, mass3, mass4, mass5, mass6);
                 System.out.println(solvedMass);
                 mass1.setText(solvedMass.get(0));
                 mass2.setText(solvedMass.get(1));
@@ -181,7 +200,7 @@ public class StoichiometryView {
             }
 
             try {
-                ArrayList<String> solvedEnergy = stoichio.missingFieldCalculator(energy1, energy2, energy3, energy4);
+                ArrayList<String> solvedEnergy = stoichio.missingFieldCalculator(energy1, energy2, energy3, energy4, energy5, energy6);
                 energy1.setText(solvedEnergy.get(0));
                 energy2.setText(solvedEnergy.get(1));
                 energy3.setText(solvedEnergy.get(2));
@@ -194,7 +213,8 @@ public class StoichiometryView {
 
 
             try {
-                ArrayList<String> solvedConcentration = stoichio.missingFieldCalculator(concentration1, concentration2, concentration3, concentration4);
+                ArrayList<String> solvedConcentration = stoichio.missingFieldCalculator(concentration1, concentration2,
+                        concentration3, concentration4, concentration5, concentration6);
                 concentration1.setText(solvedConcentration.get(0));
                 concentration2.setText(solvedConcentration.get(1));
                 concentration3.setText(solvedConcentration.get(2));
@@ -264,7 +284,7 @@ public class StoichiometryView {
 
         root.setCenter(stoichiometryVBox);
         root.setTop(customMenuBarView.initializeMenuBar());
-        root.setBottom(moleculeView);
+        root.setBottom(moleculeView); // TODO REMOVE SO IT BECOMES A WINDOW
 
         return root;
     }

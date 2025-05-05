@@ -13,6 +13,10 @@ public class PHCalculator {
         return -(Math.log(concentration));
     }
 
+    public double OHConcentrationTopOH(double concentration) {
+        return -(Math.log(concentration));
+    }
+
     public double pHToH30Concentration(double pH) {
         return Math.pow(10, -pH);
     }
@@ -20,7 +24,4 @@ public class PHCalculator {
     public double pOHToOHConcentration(double pOH) {
         return Math.pow(10, -pOH);
     }
-
-    // Fidning pH of a subsatnce: Input: concentration (mol/L) Output: pH, Formula: -log[CONCETRATION]
-    // pH to Concetration: Formula: 10^-pH
 }
