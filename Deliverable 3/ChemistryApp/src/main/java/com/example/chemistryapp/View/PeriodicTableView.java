@@ -145,17 +145,20 @@ public class PeriodicTableView {
         addInfoRow(infoGrid, 5, "Group:", group);
         addInfoRow(infoGrid, 6, "Period:", period);
         addInfoRow(infoGrid, 7, "Electron Configuration:", electronConfig);
-        System.out.println(density);
 
         VBox technicalBox = new VBox(10);
         technicalBox.setPadding(new Insets(20, 0, 0, 0));
 
         Label technicalLabel = new Label("Technical Data");
         technicalLabel.setFont(new Font("Arial", 16));
-        technicalLabel.setStyle("-fx-font-weight: bold;");
+        technicalLabel.setStyle("-fx-font-weight: bold; ");
 
         TextFlow technicalFlow = new TextFlow();
+        technicalFlow.setStyle("-fx-padding: 10px; -fx-background-color: white; -fx-border-color: #1a3e1a; " +
+                "-fx-border-width: 1px; -fx-border-radius: 3px;");
+
         Text technicalText = new Text(description);
+        technicalText.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 14px; -fx-fill: #333;");
         technicalText.setWrappingWidth(600);
         technicalFlow.getChildren().add(technicalText);
 

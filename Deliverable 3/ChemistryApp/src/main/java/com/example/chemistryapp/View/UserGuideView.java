@@ -8,13 +8,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class UserGuideView {
-    public VBox initializeUserGuide() {
+
+    private StackPane root;
+
+    public StackPane initializeUserGuide() {
         Label title = new Label("User Guide");
         title.setAlignment(Pos.CENTER);
         title.setStyle("-fx-font-size: 36px; -fx-font-weight: bold;");
@@ -100,41 +106,59 @@ public class UserGuideView {
         buttonColumns.setSpacing(20);
         buttonColumns.setAlignment(Pos.CENTER);
 
-        VBox root = new VBox(title, buttonColumns);
-        root.setSpacing(20);
-        root.setAlignment(Pos.CENTER);
-        root.setPadding(new Insets(20));
-        root.getStylesheets().add(getClass().getResource("/CSSFiles/userGuide.css").toExternalForm());
+        VBox content = new VBox(title, buttonColumns);
+        content.setSpacing(20);
+        content.setAlignment(Pos.CENTER);
+        content.setPadding(new Insets(20));
+        content.getStylesheets().add(getClass().getResource("/CSSFiles/userGuide.css").toExternalForm());
+
+        root = new StackPane(content);
 
         return root;
     }
 
-    private void showPopup(String title, String content) {
-        Stage popupStage = new Stage();
+    private void showPopup(String titleText, String contentText) {
+        Rectangle backdrop = new Rectangle();
+        backdrop.widthProperty().bind(root.widthProperty());
+        backdrop.heightProperty().bind(root.heightProperty());
+        backdrop.setFill(new Color(0, 0, 0, 0.3));
 
-        Label titleLabel = new Label(title);
-        titleLabel.getStylesheets().add("popup-title");
+        Label titleLabel = new Label(titleText);
+        titleLabel.getStyleClass().add("popup-title");
 
-
-        TextArea textArea = new TextArea(content.replace("**", ""));
+        TextArea textArea = new TextArea(contentText.replace("**", ""));
         textArea.setEditable(false);
         textArea.setWrapText(true);
         textArea.setMaxWidth(400);
         textArea.setMaxHeight(300);
         textArea.getStyleClass().add("popup-text-area");
 
-        VBox popupLayout = new VBox(textArea);
-        popupLayout.getStyleClass().add("popup-container");
-        popupLayout.setPadding(new Insets(10));
+        Button closeButton = new Button("Close");
+        closeButton.getStyleClass().add("popup-close-button");
 
+        VBox contentBox = new VBox(15, titleLabel, textArea, closeButton);
+        contentBox.setAlignment(Pos.CENTER);
+        contentBox.setPadding(new Insets(20));
+        contentBox.getStyleClass().add("popup-content");
 
-        Scene popupScene = new Scene(popupLayout);
-        popupStage.setScene(popupScene);
-        popupStage.setTitle(title);
-        popupStage.show();
+        Rectangle boxBackground = new Rectangle();
+        boxBackground.setWidth(450);
+        boxBackground.setHeight(400);
+        boxBackground.setArcWidth(10);
+        boxBackground.setArcHeight(10);
+        boxBackground.setFill(Color.WHITE);
+        boxBackground.getStyleClass().add("popup-box");
 
-        popupStage.getScene().getRoot().getStyleClass().add("popup-stage");
+        StackPane popupPane = new StackPane(boxBackground, contentBox);
+        popupPane.setMaxWidth(450);
+        popupPane.setMaxHeight(400);
+        popupPane.setPadding(new Insets(10));
+        popupPane.getStyleClass().add("popup-container");
 
-        popupScene.getStylesheets().add(getClass().getResource("/CSSFiles/userGuide.css").toExternalForm());
+        closeButton.setOnAction(e -> root.getChildren().removeAll(backdrop, popupPane));
+        backdrop.setOnMouseClicked(e -> root.getChildren().removeAll(backdrop, popupPane));
+        
+        StackPane.setAlignment(popupPane, Pos.CENTER);
+        root.getChildren().addAll(backdrop, popupPane);
     }
 }
