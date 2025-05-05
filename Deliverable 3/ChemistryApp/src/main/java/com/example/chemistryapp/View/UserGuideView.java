@@ -16,10 +16,18 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * This  class creates the user guide user interface
+ * @author Amir Zismanov
+ */
 public class UserGuideView {
 
     private StackPane root;
 
+    /**
+     * This method initializes the UI for the user guide. It creates a set of buttons which explain how the program works
+     * @return the root stack pain containing all of the elements present in the user guide
+     */
     public StackPane initializeUserGuide() {
         Label title = new Label("User Guide");
         title.setAlignment(Pos.CENTER);
@@ -34,12 +42,14 @@ public class UserGuideView {
                         "3. Choose whether to load the molecule in **2D** (structural formula) or **3D** (interactive model).\n" +
                         "4. Click **\"Load Molecule\"** to display it."
         ));
+
         Button periodicTable = new Button("How to use the periodic table?");
         periodicTable.setOnAction(e -> showPopup(
                 "How to use the periodic table?",
                 "1. Click on the **\"Periodic Table\"** tab.\n" +
                         "2. To view more information about an element click on it and an additional tab will appear."
         ));
+
         Button stoichiometry = new Button("How to use the stoichiometry calculator?");
         stoichiometry.setOnAction(e -> showPopup(
                 "How to use the stoichiometry calculator?",
@@ -49,6 +59,7 @@ public class UserGuideView {
                         "4. The calculator is case sensitive.\n" +
                         "5. Once you have entered all the data, press solve."
         ));
+
         Button pHpOHCalculator = new Button("How to use the pH and pOH calculator?");
         pHpOHCalculator.setOnAction(e -> showPopup(
                 "How to use the periodic table?",
@@ -56,6 +67,7 @@ public class UserGuideView {
                         "2. Select whether to convert from pH to pOH or vice versa.\n" +
                         "3. Enter desired amount and click on the solve button."
         ));
+
         Button idealGasCalculator = new Button("How to use the ideal gas calculator?");
         idealGasCalculator.setOnAction(e -> showPopup(
                 "How to use the ideal gas calculator?",
@@ -63,6 +75,7 @@ public class UserGuideView {
                         "2. Enter values for 3 of the 4 fields (Pressure, Volume, Mole amount and Temperature).\n" +
                         "3. Click the calculate button."
         ));
+
         Button realGasCalculator = new Button("How to use the real gas calculator?");
         realGasCalculator.setOnAction(e -> showPopup(
                 "How to use the ideal gas calculator?",
@@ -70,6 +83,7 @@ public class UserGuideView {
                         "2. Enter values for 5 of the 6 fields (Pressure, Volume, Mole amount, Temperature and Parameter a and b).\n" +
                         "3. Click the calculate button."
         ));
+
         Button acidBaseCalculator = new Button("How to use the acid base calculator?");
         acidBaseCalculator.setOnAction(e -> showPopup(
                 "How to use the Acid Base Calculator?",
@@ -77,6 +91,7 @@ public class UserGuideView {
                         "2. \n" +
                         "3. Click the calculate button."
         ));
+
         Button gibbsFreeEnergyCalculator = new Button("How to use the Gibbs free energy calculator?");
         gibbsFreeEnergyCalculator.setOnAction(e -> showPopup(
                 "How to use the Gibbs Free Energy Calculator?",
@@ -84,6 +99,7 @@ public class UserGuideView {
                         "2. Enter the values for 3 of the 4 fields (Gibbs Free Energy (ΔG), Enthalpy (ΔH), Temperature(T) and Entropy (ΔS)). \n" +
                         "3. Click the calculate button."
         ));
+
         Button reactionGraphViewer = new Button("How to use the reaction graph viewer?");
         reactionGraphViewer.setOnAction(e -> showPopup(
                 "How to use the Reaction Graph Viewer?",
@@ -99,7 +115,7 @@ public class UserGuideView {
 
         VBox leftButtons = new VBox(molecule, periodicTable, stoichiometry, pHpOHCalculator, idealGasCalculator);
         VBox rightButtons = new VBox(realGasCalculator, acidBaseCalculator, gibbsFreeEnergyCalculator, reactionGraphViewer, password);
-        //hi
+
         leftButtons.setSpacing(10);
         rightButtons.setSpacing(10);
         leftButtons.setAlignment(Pos.CENTER);
@@ -120,6 +136,11 @@ public class UserGuideView {
         return root;
     }
 
+    /**
+     * This method displays a popup that appears when the user clicks on one of the buttons in the user guide
+     * @param titleText A string representing the title of the popup
+     * @param contentText A string representing the instructions written in the popup
+     */
     private void showPopup(String titleText, String contentText) {
         Rectangle backdrop = new Rectangle();
         backdrop.widthProperty().bind(root.widthProperty());

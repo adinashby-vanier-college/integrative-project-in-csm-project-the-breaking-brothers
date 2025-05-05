@@ -3,8 +3,16 @@ package com.example.chemistryapp.Controller;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This is a controller class that provides all of the data to make the initial periodic table
+ * @author Amir Zismanov
+ */
 public class PeriodicTableController {
 
+    /**
+     * This method contains an array of colors used to color each of the elements base on their categories
+     * @return a String array of colour codes
+     */
     public String[] colorsInfo() {
         String[] colors = {
                 "#FF9999", "#FFB499", "#FFFF99", "#B4FF99",
@@ -13,6 +21,10 @@ public class PeriodicTableController {
         return colors;
     }
 
+    /**
+     * This method provides data for the lanthanides
+     * @return a 2D Object array containing all of the lanthanides data
+     */
     public Object[][] lanthanidesInfo() {
         Object[][] lan = {
                 {"La", "Lanthanum", 57, 8}, {"Ce", "Cerium", 58, 8},
@@ -28,6 +40,10 @@ public class PeriodicTableController {
         return lan;
     }
 
+    /**
+     * This method provides data for the actinides
+     * @return a 2D Object array containing all of the actinides data
+     */
     public  Object[][] actinidesInfo () {
         Object[][] act = {
                 {"Ac", "Actinium",89, 9}, {"Th", "Thorium", 90, 9},
@@ -42,6 +58,10 @@ public class PeriodicTableController {
         return act;
     }
 
+    /**
+     * This method provides all of the data for the main elements in the periodic table as well as the layout info
+     * @return a 2D Object array containing element data and placement info
+     */
     public Object[][] elementInfo () {
         Object[][] elements = {
                 // Period 1
@@ -107,6 +127,11 @@ public class PeriodicTableController {
         return elements;
     }
 
+    /**
+     * This method retrieves all the data for a specific element
+     * @param atomicNumber atomic number of the element that needs to be fetched
+     * @return a 2D Object array of all the data of the required element
+     */
     public Object[][] getElementDetails (int atomicNumber) {
         com.example.chemistryapp.Controller.ElementData elementData = ElementDataScraper.scrapeElementData(atomicNumber);
 
