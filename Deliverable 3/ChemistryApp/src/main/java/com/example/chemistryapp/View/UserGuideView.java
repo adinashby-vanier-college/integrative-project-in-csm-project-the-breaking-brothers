@@ -34,7 +34,7 @@ public class UserGuideView {
                 "1. Click on the **\"Periodic Table\"** tab.\n" +
                         "2. To view more information about an element click on it and an additional tab will appear."
         ));
-        Button stoichiometry = new Button("How to use the periodic table?");
+        Button stoichiometry = new Button("How to use the stoichiometry calculator?");
         stoichiometry.setOnAction(e -> showPopup(
                 "How to use the stoichiometry calculator?",
                 "1. Click on the **\"Stoichiometry\"** tab.\n" +
@@ -61,28 +61,28 @@ public class UserGuideView {
                         "2. Enter values for 5 of the 6 fields (Pressure, Volume, Mole amount, Temperature and Parameter a and b).\n" +
                         "3. Click the calculate button."
         ));
-        Button acidBaseCalculator = new Button("How to use the Acid Base Calculator?");
+        Button acidBaseCalculator = new Button("How to use the acid base calculator?");
         acidBaseCalculator.setOnAction(e -> showPopup(
                 "How to use the Acid Base Calculator?",
                 "1. Click on the **\"Acid Base Calculator\"** tab.\n" +
                         "2. \n" +
                         "3. Click the calculate button."
         ));
-        Button gibbsFreeEnergyCalculator = new Button("How to use the Gibbs Free Energy Calculator?");
+        Button gibbsFreeEnergyCalculator = new Button("How to use the Gibbs free energy calculator?");
         gibbsFreeEnergyCalculator.setOnAction(e -> showPopup(
                 "How to use the Gibbs Free Energy Calculator?",
                 "1. Click on the **\"Gibbs Free Energy Calculator\"** tab.\n" +
                         "2. Enter the values for 3 of the 4 fields (Gibbs Free Energy (ΔG), Enthalpy (ΔH), Temperature(T) and Entropy (ΔS)). \n" +
                         "3. Click the calculate button."
         ));
-        Button reactionGraphViewer = new Button("How to use the Reaction Graph Viewer?");
+        Button reactionGraphViewer = new Button("How to use the reaction graph viewer?");
         reactionGraphViewer.setOnAction(e -> showPopup(
                 "How to use the Reaction Graph Viewer?",
                 "1. Click on the **\"Reaction Graph Viewer\"** tab.\n" +
                         "2. Enter the values for the 5 fields (Balanced Equation, Initial Concentration, Rate Constant, Total Time and Time Step). \n" +
                         "3. Click the plot graph button."
         ));
-        Button password = new Button("How to reset your password or delete your account?");
+        Button password = new Button("How to delete your account?");
         password.setOnAction(e -> showPopup(
                 "How to change your password?",
                 "1. Click on the **\"Settings\"** tab.\n" +
