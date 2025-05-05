@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -16,7 +18,10 @@ import javafx.stage.Stage;
 
 
 public class PeriodicTableView {
-    public VBox InitializePeriodicTable () {
+
+    private StackPane root;
+
+    public StackPane InitializePeriodicTable () {
         PeriodicTableController elements = new PeriodicTableController();
 
         Label title = new Label();
@@ -28,7 +33,6 @@ public class PeriodicTableView {
         mainGrid.setPadding(new Insets(10));
         mainGrid.setHgap(2);
         mainGrid.setVgap(2);
-//        mainGrid.setStyle("-fx-background-color: #f0f0f0;");
         mainGrid.setAlignment(Pos.CENTER);
 
 
@@ -70,10 +74,12 @@ public class PeriodicTableView {
             ));
         }
 
-        VBox root = new VBox(10);
-        root.getChildren().addAll(title,mainGrid, lanthanides, actinides);
-        root.setAlignment(Pos.CENTER);
 
+        VBox tableContent = new VBox(10, title, mainGrid, lanthanides, actinides);
+        tableContent.setAlignment(Pos.CENTER);
+        tableContent.setPadding(new Insets(20));
+
+        root = new StackPane(tableContent);
         return root;
     }
 
@@ -104,93 +110,95 @@ public class PeriodicTableView {
 
     public void showElementDetails(int atomicNumber, String elementName, String elementSymbol) {
         PeriodicTableController elements = new PeriodicTableController();
-        Object[][] elementArray = elements.getElementDetails(atomicNumber);
+        Object[][] detailArray = elements.getElementDetails(atomicNumber);
 
-        String atomicNumberStr = getValueFromArray(elementArray, "Atomic Number");
-        String atomicWeight = getValueFromArray(elementArray, "Atomic Weight");
-        String density = getValueFromArray(elementArray, "Density");
-        String meltingPoint = getValueFromArray(elementArray, "Melting Point");
-        String boilingPoint = getValueFromArray(elementArray, "Boiling Point");
-        String group = getValueFromArray(elementArray, "Group");
-        String period = getValueFromArray(elementArray, "Period");
-        String electronConfig = getValueFromArray(elementArray, "Electron Configuration");
-        String description = getValueFromArray(elementArray, "Description");
+        Label header = new Label(elementName + " (" + elementSymbol + ")");
+        header.setStyle("-fx-font-weight: bold; -fx-font-size: 24px");
 
-        Stage detailStage = new Stage();
-        detailStage.setTitle(elementName);
-
-        BorderPane borderPane = new BorderPane();
-        borderPane.setPadding(new Insets(20));
-
-        VBox headerBox = new VBox(10);
-        headerBox.setAlignment(Pos.CENTER);
-
-        Label nameLabel = new Label(elementName + " (" + elementSymbol + ")");
-        nameLabel.setFont(new Font("Arial", 24));
-        nameLabel.setStyle("-fx-font-weight: bold;");
-
-        headerBox.getChildren().add(nameLabel);
-        borderPane.setTop(headerBox);
+        VBox topBox = new VBox(header);
+        topBox.setAlignment(Pos.CENTER);
+        topBox.setPadding(new Insets(10));
 
         GridPane infoGrid = new GridPane();
         infoGrid.setHgap(15);
         infoGrid.setVgap(10);
         infoGrid.setPadding(new Insets(20));
 
-        addInfoRow(infoGrid, 0, "Atomic Number:", atomicNumberStr);
-        addInfoRow(infoGrid, 1, "Atomic Weight:", atomicWeight);
-        addInfoRow(infoGrid, 2, "Density:", density);
-        addInfoRow(infoGrid, 3, "Melting Point:", meltingPoint);
-        addInfoRow(infoGrid, 4, "Boiling Point:", boilingPoint);
-        addInfoRow(infoGrid, 5, "Group:", group);
-        addInfoRow(infoGrid, 6, "Period:", period);
-        addInfoRow(infoGrid, 7, "Electron Configuration:", electronConfig);
+        addInfoRow(infoGrid, 0, "Atomic Number:", getValueFromArray(detailArray, "Atomic Number"));
+        addInfoRow(infoGrid, 1, "Atomic Weight:", getValueFromArray(detailArray, "Atomic Weight"));
+        addInfoRow(infoGrid, 2, "Density:", getValueFromArray(detailArray, "Density"));
+        addInfoRow(infoGrid, 3, "Melting Point:", getValueFromArray(detailArray, "Melting Point"));
+        addInfoRow(infoGrid, 4, "Boiling Point:", getValueFromArray(detailArray, "Boiling Point"));
+        addInfoRow(infoGrid, 5, "Group:", getValueFromArray(detailArray, "Group"));
+        addInfoRow(infoGrid, 6, "Period:", getValueFromArray(detailArray, "Period"));
+        addInfoRow(infoGrid, 7, "Electron Config:", getValueFromArray(detailArray, "Electron Configuration"));
 
-        VBox technicalBox = new VBox(10);
-        technicalBox.setPadding(new Insets(20, 0, 0, 0));
+        TextFlow techFlow = new TextFlow(new Text(getValueFromArray(detailArray, "Description")));
+        techFlow.setPadding(new Insets(8));
+        techFlow.setMaxWidth(600);
+        techFlow.setStyle("-fx-font-size: 14px");
 
-        Label technicalLabel = new Label("Technical Data");
-        technicalLabel.setFont(new Font("Arial", 16));
-        technicalLabel.setStyle("-fx-font-weight: bold; ");
+        ScrollPane techScroll = new ScrollPane(techFlow);
+        techScroll.setFitToWidth(true);
+        techScroll.setPrefHeight(200);
+        techScroll.setStyle(
+                "-fx-background-color: white; " +
+                        "-fx-background-insets: 0; " +
+                        "-fx-background-radius: 6; " +
+                        "-fx-border-color: #1a3e1a; " +
+                        "-fx-border-radius: 6; " +
+                        "-fx-border-width: 1;"
+        );
 
-        TextFlow technicalFlow = new TextFlow();
-        technicalFlow.setStyle("-fx-padding: 10px; -fx-background-color: white; -fx-border-color: #1a3e1a; " +
-                "-fx-border-width: 1px; -fx-border-radius: 3px;");
+        Label technicalData = new Label("Technical Data");
+        technicalData.setStyle("-fx-font-weight: bold; -fx-font-size: 18px");
 
-        Text technicalText = new Text(description);
-        technicalText.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 14px; -fx-fill: #333;");
-        technicalText.setWrappingWidth(600);
-        technicalFlow.getChildren().add(technicalText);
+        VBox techBox = new VBox(10, technicalData, techScroll);
+        techBox.setPadding(new Insets(10));
 
-        ScrollPane scrollPane = new ScrollPane(technicalFlow);
-        scrollPane.setFitToWidth(true);
-        scrollPane.setPrefHeight(200);
-        scrollPane.setStyle("-fx-background-color: #f8f8f8; -fx-border-color: #ddd;");
+        VBox centerBox = new VBox(20, infoGrid, techBox);
 
-        technicalBox.getChildren().addAll(technicalLabel, scrollPane);
-
-        VBox contentBox = new VBox(20);
-        contentBox.getChildren().addAll(infoGrid, technicalBox);
-
-        borderPane.setCenter(contentBox);
-
-        Button closeButton = new Button("Close");
-        closeButton.setOnAction(e -> detailStage.close());
-        closeButton.setPrefWidth(100);
-
-        VBox bottomBox = new VBox(closeButton);
-        bottomBox.setPadding(new Insets(20, 0, 0, 0));
+        Button close = new Button("Close");
+        close.setOnAction(e -> {
+            // remove any overlay nodes marked with userData="DETAIL_OVERLAY"
+            root.getChildren().removeIf(node ->
+                    "DETAIL_OVERLAY".equals(node.getUserData())
+            );
+        });
+        VBox bottomBox = new VBox(close);
         bottomBox.setAlignment(Pos.CENTER);
+        bottomBox.setPadding(new Insets(10));
 
-        borderPane.setBottom(bottomBox);
+        BorderPane detailPane = new BorderPane();
+        detailPane.setTop(topBox);
+        detailPane.setCenter(centerBox);
+        detailPane.setBottom(bottomBox);
+        detailPane.setMaxWidth(700);
+        detailPane.setMaxHeight(600);
+        detailPane.setStyle(
+                "-fx-background-color: white; " +
+                        "-fx-border-color: #666; " +
+                        "-fx-border-width: 1px; " +
+                        "-fx-border-radius: 10px; " +
+                        "-fx-background-radius: 10px;"
+        );
+        detailPane.setUserData("DETAIL_OVERLAY");
 
-        Scene scene = new Scene(borderPane, 700, 600);
-        detailStage.setScene(scene);
+        Rectangle backdrop = new Rectangle();
+        backdrop.widthProperty().bind(root.widthProperty());
+        backdrop.heightProperty().bind(root.heightProperty());
+        backdrop.setFill(Color.rgb(0, 0, 0, 0.4));
+        backdrop.setUserData("DETAIL_OVERLAY");
+        backdrop.setOnMouseClicked(e ->
+                root.getChildren().removeIf(node ->
+                        "DETAIL_OVERLAY".equals(node.getUserData())
+                )
+        );
 
-        StackPane root = new StackPane();
-
-        detailStage.show();
+        root.getChildren().addAll(backdrop, detailPane);
+        StackPane.setAlignment(detailPane, Pos.CENTER);
     }
+
 
     private String getValueFromArray(Object[][] array, String key) {
         for (Object[] row : array) {
