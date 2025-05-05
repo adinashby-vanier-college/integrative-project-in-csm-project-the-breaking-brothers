@@ -21,7 +21,8 @@ public class ReactionGraphViewer {
         TextField rateConstantInput = new TextField("0.1");
         TextField totalTimeInput = new TextField("100");
         TextField timeStepInput = new TextField("1");
-        Button plotButton = new Button("Plot Graph");
+        Button plotButton = styleButton("Plot graph");
+
 
         NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("Time (s)");
@@ -85,5 +86,14 @@ public class ReactionGraphViewer {
                 new Label("Time Step (s):"), timeStepInput,
                 plotButton, lineChart);
         return root;
+
+
+    }
+    private Button styleButton(String text) {
+        Button button = new Button(text);
+        button.setStyle("-fx-background-color: #386641; -fx-text-fill: white; -fx-font-weight: bold; " +
+                "-fx-font-size: 14px; -fx-min-width: 364px; -fx-max-width: 364px; -fx-min-height: 45px; " +
+                "-fx-border-radius: 10px; -fx-alignment: center; -fx-padding: 10px;");
+        return button;
     }
 }
