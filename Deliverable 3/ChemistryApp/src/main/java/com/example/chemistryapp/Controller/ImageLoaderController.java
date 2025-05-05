@@ -44,7 +44,7 @@ public class ImageLoaderController {
         }
     }
 
-    public static void loadMoleculeImage(String moleculeFormula, Consumer<Image> callback) {
+    public void loadMoleculeImage(String moleculeFormula, Consumer<Image> callback) {
         String urlString = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/" + moleculeFormula + "/PNG";
 
         new Thread(() -> {
