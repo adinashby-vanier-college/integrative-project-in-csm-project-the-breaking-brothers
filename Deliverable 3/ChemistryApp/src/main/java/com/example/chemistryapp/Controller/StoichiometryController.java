@@ -4,6 +4,9 @@ package com.example.chemistryapp.Controller;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -422,6 +425,18 @@ public class StoichiometryController {
         errorMessage.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(errorMessage, 100, 100);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void moleculeViewerScreen(ImageView moleculeView) {
+        Stage stage = new Stage();
+        stage.setTitle("2D Molecule Viewer");
+
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(moleculeView);
+
+        Scene scene = new Scene(borderPane, 400, 600);
         stage.setScene(scene);
         stage.show();
     }
