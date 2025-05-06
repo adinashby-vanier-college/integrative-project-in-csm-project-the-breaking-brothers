@@ -10,11 +10,13 @@ public class PHCalculator {
     }
 
     public double H30ConcentrationTopH(double concentration) {
-        return -(Math.log(concentration));
+        double pH = -(Math.log10(concentration));
+        return Math.round(pH * 10.0) / 10.0; // Rounding to 1 decimal
     }
 
     public double OHConcentrationTopOH(double concentration) {
-        return -(Math.log(concentration));
+        double pOH = -(Math.log10(concentration));
+        return Math.round((pOH * 10)/10);
     }
 
     public double pHToH30Concentration(double pH) {
