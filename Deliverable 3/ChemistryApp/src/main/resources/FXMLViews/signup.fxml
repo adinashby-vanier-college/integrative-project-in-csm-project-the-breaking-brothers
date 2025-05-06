@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.chemistryapp.Controller.SignUpController"
+           style="-fx-background-color: white;">
+
+    <VBox spacing="15" alignment="CENTER" style="-fx-pref-width: 350px;">
+        <!-- Sign Up Title -->
+        <Label alignment="TOP_CENTER" text="Sign Up" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+
+        <!-- Email Field -->
+        <VBox spacing="5" alignment="CENTER">
+            <Label text="Email" />
+            <TextField fx:id="emailField" promptText="Enter your email"
+                       style="-fx-min-width: 364px;-fx-max-width: 364px;-fx-min-height: 45px;-fx-max-width: 45px;
+                              -fx-border-color: lightgray; -fx-border-radius: 7px;-fx-background-radius: 7px;" />
+        </VBox>
+
+
+        <!-- Password Field -->
+        <VBox spacing="5" alignment="CENTER">
+            <Label text="Password" />
+            <PasswordField fx:id="passwordField" promptText="Enter your password"
+                           style="-fx-min-width: 364px;-fx-max-width: 364px;-fx-min-height: 45px;-fx-max-width: 45px; -fx-padding: 8px;
+                                  -fx-border-color: lightgray; -fx-border-radius: 7px;-fx-background-radius: 7px;" />
+        </VBox>
+
+        <!-- Sign Up Button -->
+        <Button text="Sign Up" onAction="#handleSignUp"
+                style="-fx-background-color: #386641; -fx-text-fill: white;
+                       -fx-font-weight: bold; -fx-font-size: 14px;
+                       -fx-min-width: 364px;-fx-max-width: 364px;-fx-min-height: 45px;-fx-max-width: 45px; -fx-padding: 10px;
+                       -fx-border-radius: 10px;" />
+
+        <!-- Back to Login Section -->
+        <HBox spacing="5" alignment="CENTER">
+            <Label text="Already have an account?" style="-fx-text-fill: gray;" />
+            <Button text="Log in" onAction="#handleLogin"
+                    style="-fx-background-color: transparent; -fx-text-fill: #2196F3;
+                           -fx-font-weight: bold; -fx-border-width: 0;" />
+        </HBox>
+
+        <!-- Error Message Label -->
+        <Label fx:id="errorLabel" text="" style="-fx-text-fill: red; -fx-font-size: 12px;" />
+    </VBox>
+</StackPane>

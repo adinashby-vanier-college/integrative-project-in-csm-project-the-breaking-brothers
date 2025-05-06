@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.image.ImageView?>
+<SplitPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.chemistryapp.Controller.RealGasController"
+           orientation="HORIZONTAL" dividerPositions="0.55">
+
+    <!-- Left Panel: Real Gas Calculator UI -->
+    <AnchorPane>
+        <VBox spacing="10.0" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" padding="20.0">
+            <Label text="Real Gas Calculator" styleClass="heading"/>
+            <TextField fx:id="pressureField" promptText="Pressure (P in Pa)" />
+            <TextField fx:id="volumeField" promptText="Volume (V in m³)" />
+            <TextField fx:id="amountField" promptText="Amount (n in mol)" />
+            <TextField fx:id="temperatureField" promptText="Temperature (T in K)" />
+            <TextField fx:id="aField" promptText="Constant a (Pa·m⁶/mol²)" />
+            <TextField fx:id="bField" promptText="Constant b (m³/mol)" />
+            <Button fx:id="calculateButton" text="Calculate" onAction="#calculate" />
+            <Label fx:id="resultLabel" />
+            <Label fx:id="unitLabel" />
+            <Button fx:id="backButton" text="Back" />
+        </VBox>
+    </AnchorPane>
+
+    <!-- Right Panel: Explanation for a and b -->
+    <ScrollPane fitToWidth="true">
+        <VBox spacing="15.0" padding="20.0">
+            <Label text="Explanation of Constants" styleClass="heading"/>
+
+            <Label text="• a: Van der Waals constant for attraction.
+Represents intermolecular forces between gas molecules. Higher 'a' means stronger attractions."
+                   wrapText="true" />
+
+            <Label text="• b: Van der Waals constant for volume.
+Represents the finite volume occupied by gas molecules. Higher 'b' means larger particles."
+                   wrapText="true" />
+            <ImageView fitWidth="200" preserveRatio="true">
+                <image>
+                    <Image url="@../Images/a_b_constants.jpg" />
+                </image>
+            </ImageView>
+        </VBox>
+    </ScrollPane>
+</SplitPane>

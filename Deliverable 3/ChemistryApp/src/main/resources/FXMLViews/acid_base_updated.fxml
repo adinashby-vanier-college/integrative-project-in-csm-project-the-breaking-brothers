@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.chemistryapp.Controller.AcidBaseController"
+           orientation="HORIZONTAL" dividerPositions="0.55">
+
+    <!-- Left Panel: Acid-Base Calculator UI -->
+    <AnchorPane>
+        <VBox spacing="10.0" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" padding="20.0">
+            <Label text="Acid-Base Neutralization" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+
+            <TextField fx:id="acidField" promptText="Acid (e.g., HCl)" />
+            <TextField fx:id="baseField" promptText="Base (e.g., NaOH)" />
+            <TextField fx:id="acidMolesField" promptText="Moles of Acid" />
+            <TextField fx:id="baseMolesField" promptText="Moles of Base" />
+
+            <Button fx:id="neutralizeButton" text="Neutralize" onAction="#calculateNeutralization" />
+            <Label fx:id="resultLabel" />
+            <Label fx:id="waterLabel" />
+
+            <Separator />
+
+            <Label text="Mass to Moles Converter" styleClass="heading" />
+            <TextField fx:id="massField" promptText="Mass (g)" />
+            <TextField fx:id="molarMassField" promptText="Molar Mass (g/mol)" />
+            <Button fx:id="convertButton" text="Convert" onAction="#convertMassToMoles" />
+            <TextField fx:id="molesOutputField" editable="false" />
+            <Button fx:id="backButton" text="Back" />
+        </VBox>
+    </AnchorPane>
+
+    <!-- Right Panel: Definitions of Acids and Bases -->
+    <ScrollPane fitToWidth="true">
+        <VBox spacing="15.0" padding="20.0">
+            <Label text="What is an Acid?" style="-fx-font-size: 28px; -fx-font-weight: bold;" wrapText="true"/>
+            <Label text="An acid is a substance that donates protons (H⁺ ions) in a chemical reaction. Common examples include HCl, H₂SO₄, and HNO₃.
+                        Strong acids are usually composed of hydroge that is attached to a hallogen whic creates ionic bonds"
+                   style="-fx-font-size: 20px;" wrapText="true"/>
+
+            <Label text="What is a Base?" style="-fx-font-size: 28px; -fx-font-weight: bold;" wrapText="true"/>
+            <Label text="A base is a substance that accepts protons or donates hydroxide ions (OH⁻). Common examples include NaOH, KOH, and NH₃.
+                        Strong bases are usually composed of an alcali or an alcali-earth since they are the elemts that give the electrons easily allowing to
+                        create the ionic bonds."
+                   style="-fx-font-size: 20px;" wrapText="true"/>
+        </VBox>
+    </ScrollPane>
+</SplitPane>

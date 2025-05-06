@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
+<TabPane fx:id="tabPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chemistryapp.Controller.MainDashboardController">
+    <tabs>
+        <Tab fx:id="moleculeViewerTab" text="Molecule Viewer" closable="false">
+            <!-- Tab content will be loaded dynamically -->
+        </Tab>
+        <Tab fx:id="periodicTableTab" text="Periodic Table" closable="false">
+            <!-- Content will be set dynamically -->
+        </Tab>
+
+        <Tab fx:id="stoichiometryTab" text="Stoichiometry" closable="false">
+
+        </Tab>
+
+        <Tab fx:id="pHCalculatorTab" text="pH/pOH Calculator" closable="false">
+
+        </Tab>
+
+        <Tab fx:id="userGuideTab" text="User Guide" closable="false">
+
+        </Tab>
+        <Tab fx:id="idealGasCalculatorTab" text="Ideal Gas Calculator" closable="false">
+
+        </Tab>
+        <Tab fx:id="realGasCalculatorTab" text="Real Gas Calculator" closable="false">
+
+        </Tab>
+        <Tab fx:id="acidBaseCalculatorTab" text="Acid Base Calculator" closable="false">
+
+        </Tab>
+        <Tab fx:id="gibbsFreeEnergyCalculatorTab" text="Gibbs Free Energy Calculator" closable="false">
+
+        </Tab>
+
+        <Tab fx:id="graphTab" text="Reaction Graph Viewer" closable="false">
+
+        </Tab>
+
+        <Tab fx:id="settingsTab" closable="false">
+            <graphic>
+                <HBox spacing="5">
+                    <ImageView fitWidth="16" fitHeight="16">
+                        <Image url="@../Images/gear.png" />
+                    </ImageView>
+                    <Label text="Settings" />
+                </HBox>
+            </graphic>
+        </Tab>
+
+    </tabs>
+</TabPane>

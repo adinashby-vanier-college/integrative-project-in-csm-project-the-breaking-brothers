@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chemistryapp.Controller.ImageLoaderController"
+           style="-fx-padding: 20px;">
+
+    <VBox spacing="20" alignment="CENTER" style="-fx-pref-width: 400px; -fx-padding: 20px;">
+
+        <!-- Molecule Input -->
+        <TextField fx:id="moleculeInput" promptText="Penicillin"
+                   style="-fx-font-size: 16px; -fx-min-width: 300px; -fx-max-width: 300px; -fx-min-height: 45px; -fx-padding: 10px;
+                          -fx-border-color: lightgray; -fx-border-radius: 7px; -fx-background-radius: 7px;" />
+
+        <!-- Buttons for Loading in 2D and 3D -->
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Load in 2D" onAction="#handleLoad2D"
+                    style="-fx-background-color: #386641; -fx-text-fill: white; -fx-font-weight: bold;
+                           -fx-font-size: 16px; -fx-min-width: 140px; -fx-max-width: 140px; -fx-min-height: 45px;
+                           -fx-padding: 10px; -fx-border-radius: 10px;" />
+            <Button text="Load in 3D" onAction="#handleLoad3D"
+                    style="-fx-background-color: #386641; -fx-text-fill: white; -fx-font-weight: bold;
+                           -fx-font-size: 16px; -fx-min-width: 140px; -fx-max-width: 140px; -fx-min-height: 45px;
+                           -fx-padding: 10px; -fx-border-radius: 10px;" />
+        </HBox>
+
+        <!-- Molecule Image Display -->
+        <ImageView fx:id="moleculeImage" fitWidth="500" fitHeight="500" style="-fx-background-color: white; -fx-padding: 20px;"/>
+
+    </VBox>
+
+</StackPane>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chemistryapp.Controller.SettingsController"
+            style="-fx-padding: 30px;">
+
+    <!-- Title at top) -->
+    <top>
+        <StackPane BorderPane.alignment="CENTER">
+            <Label text="Settings" style="-fx-font-size: 32px; -fx-font-weight: bold;"/>
+        </StackPane>
+    </top>
+
+    <!-- Centered Content -->
+    <center>
+        <VBox spacing="30" alignment="CENTER">
+            <ToggleButton fx:id="darkModeToggle" text="Dark Mode"/>
+
+            <!-- select font size -->
+            <VBox spacing="10" alignment="CENTER">
+                <Slider fx:id="fontSizeSlider" min="10" max="30" value="14" showTickLabels="true" showTickMarks="true"
+                        majorTickUnit="5" minorTickCount="1" style="-fx-pref-width: 300px;"/>
+                <Label text="Font Size" style="-fx-font-size: 18px;"/>
+                <Label fx:id="fontSizeValue" text="14" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            </VBox>
+        </VBox>
+    </center>
+
+    <!-- buttons at bottom -->
+    <bottom>
+        <VBox alignment="CENTER" spacing="15" style="-fx-padding: 0 0 30 0;">
+
+            <Button text="Delete Account" onAction="#handleDeleteAccount"
+                    style="-fx-background-color: #d9534f; -fx-text-fill: white;
+                           -fx-font-weight: bold; -fx-font-size: 16px;
+                           -fx-pref-width: 300px; -fx-pref-height: 45px;
+                           -fx-border-radius: 10px;"/>
+        </VBox>
+    </bottom>
+
+</BorderPane>

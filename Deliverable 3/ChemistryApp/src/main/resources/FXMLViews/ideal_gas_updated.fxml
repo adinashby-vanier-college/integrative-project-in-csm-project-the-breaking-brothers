@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<SplitPane orientation="HORIZONTAL" dividerPositions="0.5" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.chemistryapp.Controller.IdealGasController">
+
+    <!-- LEFT: Calculator Form -->
+    <AnchorPane>
+        <VBox spacing="10.0" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+            <Label text="Ideal Gas Law Calculator" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+            <TextField fx:id="pressureField" promptText="Pressure (P in Pa)" style="-fx-min-width: 364px;
+                -fx-max-width: 364px; -fx-min-height: 45px;-fx-border-color: lightgray; -fx-padding: 10px;
+                -fx-border-radius: 7px; -fx-background-radius: 7px;" />
+            <TextField fx:id="volumeField" promptText="Volume (V in m³)" style="-fx-min-width: 364px;
+                -fx-max-width: 364px; -fx-min-height: 45px;-fx-border-color: lightgray; -fx-padding: 10px;
+                -fx-border-radius: 7px; -fx-background-radius: 7px;"/>
+            <TextField fx:id="amountField" promptText="Amount (n in mol)" style="-fx-min-width: 364px;
+                -fx-max-width: 364px; -fx-min-height: 45px;-fx-border-color: lightgray; -fx-padding: 10px;
+                -fx-border-radius: 7px; -fx-background-radius: 7px;"/>
+            <TextField fx:id="temperatureField" promptText="Temperature (T in K)" style="-fx-min-width: 364px;
+                -fx-max-width: 364px; -fx-min-height: 45px;-fx-border-color: lightgray; -fx-padding: 10px;
+                -fx-border-radius: 7px; -fx-background-radius: 7px;"/>
+            <Button fx:id="calculateButton" text="Calculate" onAction="#calculate" style="-fx-background-color: #386641;
+                -fx-text-fill: white; -fx-font-weight: bold;-fx-font-size: 14px;
+                -fx-min-width: 364px; -fx-max-width: 364px; -fx-min-height: 45px;-fx-border-radius: 10px;
+                -fx-alignment: center; -fx-padding: 10px;"/>/>
+            <Label fx:id="resultLabel" />
+            <Label fx:id="unitLabel" />
+            <Button fx:id="backButton" text="Back" />
+        </VBox>
+    </AnchorPane>
+
+    <!-- RIGHT: Educational Content -->
+    <ScrollPane fitToWidth="true">
+        <VBox spacing="15.0" padding="20.0">
+            <Label text="Gas Laws Summary"  style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <Label text="Boyle’s Law:\nP ∝ 1/V (Constant T)\nPressure increases as volume decreases." wrapText="true" />
+            <ImageView fitWidth="200" preserveRatio="true">
+                <Image url="@../Images/Boyles-law.jpg" />
+            </ImageView>
+
+
+            <Label text="Charles’s Law:\nV ∝ T (Constant P)\nVolume increases with temperature." wrapText="true" />
+            <ImageView fitWidth="200" preserveRatio="true">
+                <image>
+                    <Image url="@../Images/charles_law.jpeg" />
+                </image>
+            </ImageView>
+
+            <Label text="Avogadro’s Law:\nV ∝ n (Constant P, T)\nMore moles means more volume." wrapText="true" />
+            <ImageView fitWidth="200" preserveRatio="true">
+                <image>
+                    <Image url="@../Images/Avogadros-law.jpg" />
+                </image>
+            </ImageView>
+
+            <Label text="Gay-Lussac’s Law:\nP ∝ T (Constant V)\nPressure increases with temperature." wrapText="true" />
+            <ImageView fitWidth="200" preserveRatio="true">
+                <image>
+                    <Image url="@../Images/Gay-Lussacs-Law.jpg" />
+                </image>
+            </ImageView>
+        </VBox>
+    </ScrollPane>
+</SplitPane>
