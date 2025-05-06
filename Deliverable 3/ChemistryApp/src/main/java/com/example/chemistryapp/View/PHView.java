@@ -22,6 +22,9 @@ public class PHView {
         conversionChoice.getItems().addAll("pH -> pOH", "pOH -> pH", "H3O+ Concentration -> pH",
                 "pH -> H3O+ Concentration", "OH- Concentration -> pOH", "pOH -> OH- Concentration");
         conversionChoice.setPromptText("--Choose Conversion Type--");
+        conversionChoice.setStyle("-fx-font-size: 16px;" + "-fx-background-radius: 5;" + "-fx-border-radius: 5;");
+        conversionChoice.setPrefWidth(400);
+        conversionChoice.setPrefHeight(40);
 
         TextField userInput = new TextField();
         userInput.setPromptText("Please select conversion type first.");
