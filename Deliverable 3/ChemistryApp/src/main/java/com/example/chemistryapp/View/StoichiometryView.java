@@ -19,7 +19,6 @@ public class StoichiometryView {
         ImageView moleculeView = new ImageView(); // ImageViewer for molecules
         ImageLoaderController imageloaderController = new ImageLoaderController();
         StoichiometryController stoichio = new StoichiometryController();
-        CustomMenuBarView customMenuBarView = new CustomMenuBarView();
         BorderPane root = new BorderPane();
 
         // GridPane used for handling the stoichiometry interface
@@ -34,9 +33,7 @@ public class StoichiometryView {
         TextField molecule4 = styleTextField("Enter Molecule");
         TextField molecule5 = styleTextField("Enter Molecule");
         TextField molecule6 = styleTextField("Enter Molecule");
-        /*molecule2.setPromptText("Enter Molecule");
-        molecule3.setPromptText("Enter Molecule");
-        molecule4.setPromptText("Enter Molecule");*/
+
 
         Text plus = new Text("+");
         Text plus2 = new Text("+");
