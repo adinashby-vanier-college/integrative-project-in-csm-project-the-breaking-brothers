@@ -88,7 +88,9 @@ public class UserGuideView {
         acidBaseCalculator.setOnAction(e -> showPopup(
                 "How to use the Acid Base Calculator?",
                 "1. Click on the **\"Acid Base Calculator\"** tab.\n" +
-                        "2. \n" +
+                        "2. Input the chemical formulas of the acid and base active in the reaction\n" +
+                        "3. Input the amount of each (in moles)\n" +
+                        "4. If the amount is unknown use the calculator on the side to calculate the amount\n" +
                         "3. Click the calculate button."
         ));
 
