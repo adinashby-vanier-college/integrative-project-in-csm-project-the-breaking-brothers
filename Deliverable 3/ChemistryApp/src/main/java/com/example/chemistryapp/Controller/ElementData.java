@@ -1,5 +1,9 @@
 package com.example.chemistryapp.Controller;
 
+/**
+ * This class contains all of the required fields for an element of the periodic table
+ * @author
+ */
 public class ElementData {
     private String name;
     private String symbol;

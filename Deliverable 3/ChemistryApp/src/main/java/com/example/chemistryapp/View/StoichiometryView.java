@@ -2,6 +2,7 @@ package com.example.chemistryapp.View;
 
 import com.example.chemistryapp.Controller.ImageLoaderController;
 import com.example.chemistryapp.Controller.StoichiometryController;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -18,7 +19,6 @@ public class StoichiometryView {
         ImageView moleculeView = new ImageView(); // ImageViewer for molecules
         ImageLoaderController imageloaderController = new ImageLoaderController();
         StoichiometryController stoichio = new StoichiometryController();
-        CustomMenuBarView customMenuBarView = new CustomMenuBarView();
         BorderPane root = new BorderPane();
 
         // GridPane used for handling the stoichiometry interface
@@ -33,9 +33,7 @@ public class StoichiometryView {
         TextField molecule4 = styleTextField("Enter Molecule");
         TextField molecule5 = styleTextField("Enter Molecule");
         TextField molecule6 = styleTextField("Enter Molecule");
-        /*molecule2.setPromptText("Enter Molecule");
-        molecule3.setPromptText("Enter Molecule");
-        molecule4.setPromptText("Enter Molecule");*/
+
 
         Text plus = new Text("+");
         Text plus2 = new Text("+");
@@ -50,29 +48,35 @@ public class StoichiometryView {
         Button view5 = styleButton("View");
         Button view6 = styleButton("View");
 
+        // When the view button is clicked, it creates a popup
         view1.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule1.getText(), image -> moleculeView.setImage(image));
-
+            stoichio.moleculeViewerScreen(moleculeView);
         });
 
         view2.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule2.getText(), image -> moleculeView.setImage(image));
+            stoichio.moleculeViewerScreen(moleculeView);
         });
 
         view3.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule3.getText(), image -> moleculeView.setImage(image));
+            stoichio.moleculeViewerScreen(moleculeView);
         });
 
         view4.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule4.getText(), image -> moleculeView.setImage(image));
+            stoichio.moleculeViewerScreen(moleculeView);
         });
 
         view5.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule5.getText(), image -> moleculeView.setImage(image));
+            stoichio.moleculeViewerScreen(moleculeView);
         });
 
         view6.setOnAction(e -> {
             imageloaderController.loadMoleculeImage(molecule6.getText(), image -> moleculeView.setImage(image));
+            stoichio.moleculeViewerScreen(moleculeView);
         });
 
         TextField mass1 = new TextField();
@@ -87,19 +91,6 @@ public class StoichiometryView {
         mass4.setPromptText("Enter Mass (in g)");
         mass5.setPromptText("Enter Mass (in g)");
         mass6.setPromptText("Enter Mass (in g)");
-
-        /*TextField moles1 = new TextField();
-        TextField moles2 = new TextField();
-        TextField moles3 = new TextField();
-        TextField moles4 = new TextField();
-        TextField moles5 = new TextField();
-        TextField moles6 = new TextField();
-        moles1.setPromptText("Enter amount of Moles");
-        moles2.setPromptText("Enter amount of Moles");
-        moles3.setPromptText("Enter amount of Moles");
-        moles4.setPromptText("Enter amount of Moles");
-        moles5.setPromptText("Enter amount of Moles");
-        moles6.setPromptText("Enter amount of Moles");*/
 
         TextField energy1 = new TextField();
         TextField energy2 = new TextField();
@@ -127,10 +118,14 @@ public class StoichiometryView {
         concentration5.setPromptText("Enter Concentration (in g/L");
         concentration6.setPromptText("Enter Concentration (in g/L");
 
+        VBox errorLog = new VBox(15);
+        errorLog.setPadding(new Insets(10));
+
         Button solve = styleButton("Solve!");
         solve.setAlignment(Pos.CENTER);
 
         solve.setOnAction(e -> {
+            errorLog.getChildren().clear();
             ArrayList<String> reactants = new ArrayList<>();
             ArrayList<String> products = new ArrayList<>();
 
@@ -154,9 +149,9 @@ public class StoichiometryView {
                 products.add(molecule6.getText());
             }
 
-            System.out.println(molecule3.getText());
+            /*System.out.println(molecule3.getText());
             System.out.println(reactants);
-            System.out.println(products);
+            System.out.println(products);*/
 
             try {
                 ArrayList<ArrayList<String>> balancedEquation = stoichio.getBalancedEquation(
@@ -182,8 +177,19 @@ public class StoichiometryView {
                 System.out.println(balancedEquation);
             }
             catch (Exception stoichioException) {
-                System.out.println("Invalid Equation. Try Again.");
-                // stoichio.errorBox("Equation");
+                TextField stoichiometryError = new TextField("Invalid Equation. Try Again.");
+                stoichiometryError.setEditable(false);
+                stoichiometryError.setStyle(
+                        "-fx-background-color: #ffe6e6;" + // light red background
+                                "-fx-font-size: 16px;" +
+                                "-fx-border-color: red;" +             // red border
+                                "-fx-border-width: 2px;" +
+                                "-fx-text-fill: darkred;" +            // dark red text
+                                "-fx-background-radius: 5;" +
+                                "-fx-border-radius: 5;" +
+                                "-fx-padding: 5;"
+                );
+                errorLog.getChildren().add(stoichiometryError);
             }
 
             try {
@@ -195,8 +201,19 @@ public class StoichiometryView {
                 mass4.setText(solvedMass.get(3));
             }
             catch (Exception solvedMassException) {
-                System.out.println("Invalid Masses. Try Again.");
-                // stoichio.errorBox("Masses");
+                TextField massError = new TextField("Invalid Masses. Try Again.");
+                massError.setEditable(false);
+                massError.setStyle(
+                        "-fx-background-color: #ffe6e6;" + // light red background
+                                "-fx-font-size: 16px;" +
+                                "-fx-border-color: red;" +             // red border
+                                "-fx-border-width: 2px;" +
+                                "-fx-text-fill: darkred;" +            // dark red text
+                                "-fx-background-radius: 5;" +
+                                "-fx-border-radius: 5;" +
+                                "-fx-padding: 5;"
+                );
+                errorLog.getChildren().add(massError);
             }
 
             try {
@@ -207,8 +224,19 @@ public class StoichiometryView {
                 energy4.setText(solvedEnergy.get(3));
             }
             catch (Exception solvedEnergyException) {
-                System.out.println("Invalid Energies. Try Again.");
-                // stoichio.errorBox("Energies");
+                TextField energyyError = new TextField("Invalid Energies. Try Again.");
+                energyyError.setEditable(false);
+                energyyError.setStyle(
+                        "-fx-background-color: #ffe6e6;" + // light red background
+                                "-fx-font-size: 16px;" +
+                                "-fx-border-color: red;" +             // red border
+                                "-fx-border-width: 2px;" +
+                                "-fx-text-fill: darkred;" +            // dark red text
+                                "-fx-background-radius: 5;" +
+                                "-fx-border-radius: 5;" +
+                                "-fx-padding: 5;"
+                );
+                errorLog.getChildren().add(energyyError);
             }
 
 
@@ -222,8 +250,19 @@ public class StoichiometryView {
 
             }
             catch (Exception solvedConcentrationException) {
-                System.out.println("Invalid Concentrations. Try Again.");
-                // stoichio.errorBox("Concentrations");
+                TextField concentrationError = new TextField("Invalid Concentrations. Try Again.");
+                concentrationError.setEditable(false);
+                concentrationError.setStyle(
+                        "-fx-background-color: #ffe6e6;" + // light red background
+                                "-fx-font-size: 16px;" +
+                                "-fx-border-color: red;" +             // red border
+                                "-fx-border-width: 2px;" +
+                                "-fx-text-fill: darkred;" +            // dark red text
+                                "-fx-background-radius: 5;" +
+                                "-fx-border-radius: 5;" +
+                                "-fx-padding: 5;"
+                );
+                errorLog.getChildren().add(concentrationError);
             }
 
         });
@@ -255,13 +294,6 @@ public class StoichiometryView {
         gridPane.add(mass5, 8,2);
         gridPane.add(mass6, 10,2);
 
-        /*gridPane.add(moles1, 0, 3);
-        gridPane.add(moles2, 2, 3);
-        gridPane.add(moles3, 4, 3);
-        gridPane.add(moles4, 6, 3);
-        gridPane.add(moles5, 8, 3);
-        gridPane.add(moles6, 10, 3);*/
-
         gridPane.add(energy1, 0, 3);
         gridPane.add(energy2, 2, 3);
         gridPane.add(energy3, 4, 3);
@@ -283,8 +315,7 @@ public class StoichiometryView {
         stoichiometryVBox.getChildren().addAll(gridPane, solve);
 
         root.setCenter(stoichiometryVBox);
-        root.setTop(customMenuBarView.initializeMenuBar());
-        root.setBottom(moleculeView); // TODO REMOVE SO IT BECOMES A WINDOW
+        root.setBottom(errorLog);
 
         return root;
     }

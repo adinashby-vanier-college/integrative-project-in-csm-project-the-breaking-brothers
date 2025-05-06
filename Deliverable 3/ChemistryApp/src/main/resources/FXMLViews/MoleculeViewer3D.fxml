@@ -14,7 +14,7 @@
     <VBox spacing="20" alignment="CENTER" style="-fx-pref-width: 400px; -fx-padding: 20px;">
 
         <!-- Molecule Input -->
-        <TextField fx:id="moleculeInput" promptText="Enter molecule formula"
+        <TextField fx:id="moleculeInput" promptText="Penicillin"
                    style="-fx-font-size: 16px; -fx-min-width: 300px; -fx-max-width: 300px; -fx-min-height: 45px; -fx-padding: 10px;
                           -fx-border-color: lightgray; -fx-border-radius: 7px; -fx-background-radius: 7px;" />
 

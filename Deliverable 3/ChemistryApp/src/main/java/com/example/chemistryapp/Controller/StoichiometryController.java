@@ -1,9 +1,18 @@
 package com.example.chemistryapp.Controller;
 
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -414,15 +423,17 @@ public class StoichiometryController {
         }
         return result;
     }
-    public void errorBox(String exceptionName) {
+
+    public void moleculeViewerScreen(ImageView moleculeView) {
         Stage stage = new Stage();
-        stage.setTitle("Error.");
+        stage.setTitle("2D Molecule Viewer");
 
-        TextField errorMessage = new TextField("Invalid " + exceptionName + ". Please Try Again.");
-        errorMessage.setAlignment(Pos.CENTER);
+        BorderPane borderPane = new BorderPane();
+        borderPane.setCenter(moleculeView);
 
-        Scene scene = new Scene(errorMessage, 100, 100);
+        Scene scene = new Scene(borderPane, 400, 600);
         stage.setScene(scene);
+        stage.toFront();
         stage.show();
     }
 }

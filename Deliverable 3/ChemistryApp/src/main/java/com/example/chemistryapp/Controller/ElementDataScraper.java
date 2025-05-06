@@ -11,9 +11,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class is responsible for scraping all the required data for each element
+ * @author Amir Zismanov
+ */
 public class ElementDataScraper {
     private static final String BASE_URL = "https://periodictable.com/Elements/";
 
+    /**
+     * This method extracts the data for each element
+     * @param atomicNumber the atomic number lets the method know what element to extract
+     * @return the method returns all the data as an ElementData class
+     */
     public static ElementData scrapeElementData(int atomicNumber) {
         String url = BASE_URL + String.format("%03d", atomicNumber) + "/data.html";
         ElementData elementData = new ElementData("", "", atomicNumber);
@@ -30,6 +39,7 @@ public class ElementDataScraper {
             String meltingPoint = "0";
             String boilingPoint = "0";
 
+            // Loop through each row to find the matching labels for the density, melting point and boiling point
             for (Element row : propertyRows) {
                 Elements tds = row.select("td");
                 if (tds.size() >= 2) {
@@ -56,6 +66,7 @@ public class ElementDataScraper {
             // Extraction of Atomic Weight, Group, Period, Electron Configuration
             Map<String, String> properties = new HashMap<>();
             Elements rows = doc.select("table tbody tr");
+            //Loop through each row to find values for the atomic weight, group, period and electron configuration
             for (Element row : rows) {
                 Elements cells = row.select("td");
                 if (cells.size() >= 2) {
@@ -85,7 +96,7 @@ public class ElementDataScraper {
             elementData.setDescription("Error loading data: " + e.getMessage());
         }
 
-        // Extract technical data
+        // Extract technical data which uses a slightly different URL
         try {
             String mainPageUrl = BASE_URL + String.format("%03d", atomicNumber) + "/";
             Document mainDoc = Jsoup.connect(mainPageUrl)
@@ -99,6 +110,7 @@ public class ElementDataScraper {
                     StringBuilder descriptionBuilder = new StringBuilder();
                     boolean foundBr = false;
 
+                    // After the first <br>, accumulate text and elements into the description string
                     for (Node node : td.childNodes()) {
                         if (node instanceof Element) {
                             Element el = (Element) node;
@@ -120,9 +132,6 @@ public class ElementDataScraper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
         return elementData;
     }
 }
