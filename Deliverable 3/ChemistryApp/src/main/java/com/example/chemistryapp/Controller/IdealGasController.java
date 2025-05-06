@@ -18,6 +18,7 @@ public class IdealGasController {
     @FXML
     private Button backButton;
 
+    // Extract the values from the user inputs
     @FXML
     private void calculate() {
         try {
@@ -45,10 +46,12 @@ public class IdealGasController {
         }
     }
 
+    //parse the inputs of the user and convert it into doubles
     private Double parseInput(String input) {
         return input.isEmpty() ? null : Double.parseDouble(input);
     }
 
+    //Count th empty fields
     private int countNulls(Double... values) {
         int count = 0;
         for (Double value : values) {
@@ -57,6 +60,7 @@ public class IdealGasController {
         return count;
     }
 
+    //determine what is the missing parameter
     private String findMissingParameter(Double P, Double V, Double n, Double T) {
         if (P == null) return "Pressure (P)";
         if (V == null) return "Volume (V)";
@@ -64,6 +68,7 @@ public class IdealGasController {
         return "Temperature (T)";
     }
 
+    //
     private String getUnit(String param) {
         switch (param) {
             case "Pressure (P)": return "Pa (Pascal)";

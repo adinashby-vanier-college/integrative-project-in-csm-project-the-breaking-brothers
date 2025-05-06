@@ -125,7 +125,9 @@ public class MainDashboardController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViews/ideal_gas.fxml"));
             Parent root = loader.load();
             idealGasCalculatorTab.setContent(root);
+            System.out.println("ideal gas tab loaded");
         } catch (Exception e) {
+            System.out.println("fail to load");
             e.printStackTrace();
         }
     }
